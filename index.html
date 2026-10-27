@@ -1378,7 +1378,7 @@ let db=null, saveT=null; const DOC='presentaciones/dc-educultura';
 const st=m=>{ $('#saveSt').textContent=m; };
 function save(){ clearTimeout(saveT); st('Guardando…'); saveT=setTimeout(async()=>{ const state=JSON.stringify(S);
   try{ localStorage.setItem('dc-edu',state); }catch(e){}
-  if(db){ try{ await db.doc(DOC).set({state,updatedAt:Date.now()}); st('Guardado'); }catch(e){ st('Guardado en este navegador'); } } else st('Guardado en este navegador'); },700); }
+  if(db){ try{ await db.doc(DOC).set({state,updatedAt:Date.now()}); st('Guardado'); }catch(e){ st('Guardado en este navegador'); } } else st('Guardado en este navegador'); saveT=null; },700); }
 function load(d){ if(!d) return; const b=DEF(); S={...b,...d,page:d.page||PAGE0,cfg:{...b.cfg,...(d.cfg||{}),price:{...b.cfg.price,...((d.cfg||{}).price||{})},plazo:{...b.cfg.plazo,...((d.cfg||{}).plazo||{})},phase:((d.cfg||{}).phase||b.cfg.phase)},mods:d.v?{...b.mods,...(d.mods||{})}:b.mods,v:2,texts:d.texts||{},reqs:d.reqs||[],notes:d.notes||{},colors:(d.colors&&d.colors.length===5)?d.colors:b.colors};
   S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qv=3; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
 
@@ -1458,7 +1458,15 @@ applyColors(); render(); fit();
 let start=0; try{ start=+sessionStorage.getItem('dc-slide')||0; }catch(e){}
 if(!SL[start]||isHid(start)) start=firstI(); cur=start; go(start,true);
 if(document.fonts) document.fonts.ready.then(()=>{});
-(async()=>{ try{ db=window.claude?await window.claude.use('db'):null; }catch(e){ db=null; }
+/* Fuera de claude.ai (GitHub/Netlify): estado compartido en Supabase */
+const SB={url:'https://hsqazmhsbijscirkxfzq.supabase.co',key:'sb_publishable_qbmjyiKtZVKGcHLxKYvfnw_G5sXzeAH',id:'dc-educultura'};
+function sbDb(){ const H={apikey:SB.key,'Content-Type':'application/json'};
+  return {doc:()=>({
+    async get(){ const r=await fetch(`${SB.url}/rest/v1/presentaciones?id=eq.${SB.id}&select=state`,{headers:H,cache:'no-store'}); if(!r.ok) throw new Error('get'); const j=await r.json(); return {exists:j.length>0,data:()=>j.length?{state:JSON.stringify(j[0].state)}:null}; },
+    async set(o){ const r=await fetch(`${SB.url}/rest/v1/presentaciones?on_conflict=id`,{method:'POST',headers:{...H,Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({id:SB.id,state:JSON.parse(o.state),updated_at:new Date().toISOString()})}); if(!r.ok) throw new Error('set'); } })}; }
+async function pullShared(){ if(!db||saveT) return; try{ const s_=await db.doc(DOC).get(); if(s_.exists){ const d=s_.data(); if(d&&d.state&&d.state!==JSON.stringify(S)){ load(JSON.parse(d.state)); applyColors(); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); } } }catch(e){} }
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden&&!window.claude) pullShared(); });
+(async()=>{ try{ db=window.claude?await window.claude.use('db'):sbDb(); }catch(e){ db=null; }
   if(db){ try{ const s_=await db.doc(DOC).get(); if(s_.exists){ const d=s_.data(); if(d&&d.state){ load(JSON.parse(d.state)); applyColors(); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); } } st('Guardado'); }catch(e){} } })();
 </script>
 
