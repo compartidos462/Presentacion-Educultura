@@ -832,8 +832,8 @@ const PR0=['Intercambio cultural','Idiomas y tours','Pasantías y estudio-trabaj
 const G6=[['lock','s11.a','El sistema es suyo','Código, base de datos y accesos a nombre de Educultura.'],['card','s11.b','Pago por tramos','Cada tramo se paga cuando se entrega funcionando.'],['users','s11.c','Equipo capacitado','Capacitación por rol y manual de uso.'],['pin','s11.d','Soporte en Cochabamba','Atención presencial y por WhatsApp.'],['db','s11.e','Respaldo diario','Copias automáticas de toda la información.'],['bookopen','s11.f','Documentación','Para que cualquier técnico pueda continuar.']];
 const PDFSEC=[['plan','Plan, inversión y plazo'],['diag','Diagnóstico (calculadora)'],['resp','Respuestas de la reunión'],['mods','Módulos y funciones'],['medida','A su medida'],['reqs','Pedidos especiales'],['etapas','Etapas y tiempos'],['recibe','Lo que recibe el cliente'],['acuerdos','Acuerdos'],['pedidos','Pedidos y sugerencias'],['dudas','Dudas'],['pasos','Próximos pasos']];
 const PDFSEC0=Object.fromEntries(PDFSEC.map(([k])=>[k,k!=='dudas']));
-const PDF_INTRO=()=>`Este documento resume lo que conversamos y la propuesta de ${S.cfg.name||'DC'} para ordenar las consultas, los postulantes y los pagos de ${S.cfg.client||''}.`;
-const PDF_CLOSE='Quedamos atentos para ajustar cualquier detalle y fijar la fecha de inicio.';
+const PDF_INTRO=()=>`El presente documento detalla la propuesta de ${S.cfg.name||'DC'} para la implementación de un sistema de gestión de consultas, postulantes y pagos para ${S.cfg.client||''}. Su contenido se basa en la información proporcionada por el equipo de ${S.cfg.client||'la empresa'} y en la revisión de sus canales de atención.`;
+const PDF_CLOSE='Quedamos a disposición para resolver cualquier consulta sobre esta propuesta y coordinar la fecha de inicio del proyecto.';
 const PAGE0='#e8edf8';
 const PRESETS=[['Océano (actual)',PAL0,PAGE0],['Mandarina y marino',['#FF9B54','#FF6A00','#2C6E9A','#2C6E9A','#0A2342'],'#E9EEF5'],['Arrecife y coral',['#6FE3DF','#FF5D77','#6FE3DF','#0A4A6A','#111827'],'#EAFCFF'],['Cielo dorado',['#8ECAE6','#FFB703','#8ECAE6','#219EBC','#2B2D42'],'#FBF8CC'],['Vidrio costero',['#7FE3D6','#1D8EA6','#7FE3D6','#1D8EA6','#0B3A53'],'#F5F7FA'],['Lavanda y menta',['#C9B3FF','#A6F2CF','#A6F2CF','#C9B3FF','#6B6F8A'],'#F5EAFF']];
 const DEF=()=>({page:PAGE0,texts:{},colors:[...PAL0],cfg:{mark:'DC',name:'DataCocha',client:'Educultura',price:{B:'',E:'',A:'',X:''},plazo:{B:'',E:'',A:''},phase:['','','','','']},v:2,mods:Object.fromEntries(MODS.map(m=>[m.k,false])),reqs:[],notes:{},hidden:['hora','vimos','postulante','recibe'],qs:Q0.map(q=>({...q})),ans:{},avisos:AV0.map(t=>({t,on:false})),progs:PR0.map(t=>({t,on:false})),prio:[],resp:{},mcfg:{},bubble:true,qv:3,cliColor:3,spot:true,pdf:{title:'',intro:'',closing:'',validity:'',contact:'',sec:{...PDFSEC0}}});
@@ -1383,67 +1383,66 @@ function load(d){ if(!d) return; const b=DEF(); S={...b,...d,page:d.page||PAGE0,
   S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qv=3; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
 
 /* PDF */
+const MDP={cons:'Registro centralizado de todas las consultas recibidas, con su canal de origen y fecha, evitando registros duplicados.',seg:'Control del historial de cada interesado y de los próximos contactos programados, para que ninguna consulta quede sin respuesta.',pos:'Gestión de los postulantes por programa, con sus requisitos, convocatorias y estado de avance.',doc:'Archivo digital de la documentación de cada postulante, con alertas de vencimiento y registro de citas consulares.',pag:'Registro de planes de pago, cuotas, saldos y emisión de recibos.',rep:'Indicadores de gestión actualizados sobre consultas, conversión y desempeño por canal y asesor.',wa:'Automatización de mensajes por la vía oficial de WhatsApp Business: primera respuesta, seguimientos programados y avisos al asesor.',r66:'Gestión de los programas de idiomas en el exterior, con control de cupos, límites de edad y seguimiento hasta el viaje.'};
 function buildPdf(){
   const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:'mm',format:'a4'});
-  const PW=210, L=22, W=166, TOP=38, BOT=272; let y=0; const P=S.pdf, on=k=>!!P.sec[k];
-  const rgb=h_=>[1,3,5].map(i=>parseInt(h_.slice(i,i+2),16)); const C5=rgb(S.colors[4]),C4=rgb(S.colors[3]),C2=rgb(S.colors[1]),C1=rgb(S.colors[0]);
-  const INK=[33,37,64], MUT=[104,108,140], SOFT=[243,246,253], LINE=[222,227,240];
-  const mm=pt=>pt*0.3528, LH=1.5;
-  const F=(st,sz,col)=>{ doc.setFont('times',st); doc.setFontSize(sz); doc.setTextColor(...col); };
+  const PW=210, L=25, W=160, TOP=36, BOT=268; let y=0; const P=S.pdf, on=k=>!!P.sec[k];
+  const rgb=h_=>[1,3,5].map(i=>parseInt(h_.slice(i,i+2),16)); const NAVY=rgb(S.colors[4]);
+  const INK=[30,30,30], GRAY=[95,95,95], RULE=[190,190,190], HAIR=[225,225,225];
+  const mm=pt=>pt*0.3528;
+  const F=(st,sz,col=INK)=>{ doc.setFont('times',st); doc.setFontSize(sz); doc.setTextColor(...col); };
   const brk=n=>{ if(y+n>BOT){ doc.addPage(); y=TOP; } };
-  const para=(txt,{sz=11.5,st='normal',col=INK,ind=0,after=2.5,w=W,lh=LH}={})=>{ F(st,sz,col); const lines=doc.splitTextToSize(String(txt),w-ind); const h=mm(sz)*lh; lines.forEach(l=>{ brk(h); doc.text(l,L+ind,y); y+=h; }); y+=after; };
-  let secN=0; const sec=title=>{ secN++; y+=5; brk(20); F('bold',10,C4); doc.text(String(secN).padStart(2,'0'),L,y); F('bold',15,C5); doc.text(title,L+10,y); y+=3; doc.setDrawColor(...C4); doc.setLineWidth(.5); doc.line(L,y,L+22,y); doc.setDrawColor(...LINE); doc.setLineWidth(.2); doc.line(L+22,y,L+W,y); y+=8; };
-  const table=(head,rows,cols)=>{ const pad=3, sz=10.5; const cw=cols.map(c=>c*W); const hh=8.5;
-    brk(hh+9); doc.setFillColor(...C5); doc.rect(L,y,W,hh,'F'); F('bold',10,[255,255,255]); let x=L; head.forEach((h_,i)=>{ doc.text(h_,x+pad,y+5.8); x+=cw[i]; }); y+=hh;
-    rows.forEach((r,ri)=>{ F('normal',sz,INK); const ls=r.map((c,i)=>doc.splitTextToSize(String(c),cw[i]-pad*2)); const rh=Math.max(...ls.map(l=>l.length))*mm(sz)*1.35+4.5; brk(rh);
-      if(ri%2===0){ doc.setFillColor(...SOFT); doc.rect(L,y,W,rh,'F'); } x=L; ls.forEach((l,i)=>{ F(i===0?'bold':'normal',sz,i===0?C5:INK); l.forEach((t_,k)=>doc.text(t_,x+pad,y+5.3+k*mm(sz)*1.35)); x+=cw[i]; }); y+=rh; });
-    doc.setDrawColor(...LINE); doc.setLineWidth(.2); doc.line(L,y,L+W,y); y+=6; };
-  const bullet=(b,d)=>{ const h=mm(11)*1.45; brk(h*(d?2.2:1.2)); doc.setFillColor(...C4); doc.circle(L+6.5,y-1.3,.9,'F');
-    F(d?'bold':'normal',11,d?C5:INK); doc.splitTextToSize(b,W-12).forEach(l=>{ brk(h); doc.text(l,L+10,y); y+=h; });
-    if(d){ F('normal',11,INK); doc.splitTextToSize(d,W-12).forEach(l=>{ brk(h); doc.text(l,L+10,y); y+=h; }); } y+=1.6; };
+  const para=(txt,{sz=11.5,st='normal',col=INK,ind=0,after=3,lh=1.5,just=true}={})=>{ F(st,sz,col); const w=W-ind; const lines=doc.splitTextToSize(String(txt),w); const h=mm(sz)*lh;
+    lines.forEach((l,i)=>{ brk(h); const last=i===lines.length-1; if(just&&!last&&lines.length>1) doc.text(l,L+ind,y,{maxWidth:w,align:'justify'}); else doc.text(l,L+ind,y); y+=h; }); y+=after; };
+  let secN=0, subN=0; const sec=title=>{ secN++; subN=0; y+=6; brk(22); F('bold',13,NAVY); doc.text(`${secN}.  ${title}`,L,y); y+=2.6; doc.setDrawColor(...RULE); doc.setLineWidth(.3); doc.line(L,y,L+W,y); y+=7; };
+  const table=(head,rows,cols,{first=true}={})=>{ const pad=2, sz=10.5, lh=mm(sz)*1.4; const cw=cols.map(c=>c*W);
+    brk(18); F('bold',10.5,NAVY); let x=L; head.forEach((h_,i)=>{ doc.text(h_,x+pad,y); x+=cw[i]; }); y+=2.4; doc.setDrawColor(...NAVY); doc.setLineWidth(.45); doc.line(L,y,L+W,y); y+=5.2;
+    rows.forEach(r=>{ const ls=r.map((c,i)=>{ F(i===0&&first?'bold':'normal',sz); return doc.splitTextToSize(String(c),cw[i]-pad*2); }); const rh=Math.max(...ls.map(l=>l.length))*lh; if(y+rh+3>BOT){ doc.addPage(); y=TOP; F('bold',10.5,NAVY); let hx=L; head.forEach((h_,i)=>{ doc.text(h_,hx+pad,y); hx+=cw[i]; }); y+=2.4; doc.setDrawColor(...NAVY); doc.setLineWidth(.45); doc.line(L,y,L+W,y); y+=5.2; }
+      x=L; ls.forEach((l,i)=>{ F(i===0&&first?'bold':'normal',sz,INK); l.forEach((t_,k)=>doc.text(t_,x+pad,y+k*lh)); x+=cw[i]; }); y+=rh-lh+3; doc.setDrawColor(...HAIR); doc.setLineWidth(.2); doc.line(L,y,L+W,y); y+=5.2; });
+    y+=2; };
   const client=S.cfg.client||'', brand=S.cfg.name||'', mark=S.cfg.mark||'DC';
   const fecha=new Date().toLocaleDateString('es-BO',{day:'numeric',month:'long',year:'numeric'});
   const title=(P.title||'').trim()||`Propuesta para ${client}`;
   const p=planOf();
-  // ---- portada / encabezado de la primera página
-  y=TOP+8; F('bold',9,C4); doc.setCharSpace(.6); doc.text('PROPUESTA TÉCNICA Y ECONÓMICA',L,y); doc.setCharSpace(0); y+=11;
-  F('bold',25,C5); doc.splitTextToSize(title,W).forEach(l=>{ doc.text(l,L,y); y+=mm(25)*1.25; }); y+=2;
-  doc.setFillColor(...C4); doc.rect(L,y,14,1.2,'F'); doc.setFillColor(...C2); doc.rect(L+14,y,8,1.2,'F'); y+=9;
-  // ficha
-  const facts=[['Cliente',client],['Fecha',new Date().toLocaleDateString('es-BO',{day:'2-digit',month:'2-digit',year:'numeric'})],['Plan',pName(p)],['Vigencia',(P.validity||'').trim()||'---']];
-  doc.setFillColor(...SOFT); doc.roundedRect(L,y,W,20,2.5,2.5,'F'); facts.forEach((f,i)=>{ const x=L+6+i*(W-6)/4; F('bold',8.5,C4); doc.setCharSpace(.4); doc.text(f[0].toUpperCase(),x,y+7.5); doc.setCharSpace(0); F('bold',11.5,C5); doc.text(doc.splitTextToSize(String(f[1]),(W-12)/4-3)[0],x,y+14); }); y+=30;
-  para((P.intro||'').trim()||PDF_INTRO(),{sz:12,after:3});
+  // ---- bloque de título
+  y=TOP+10; F('normal',10,GRAY); doc.text('Propuesta de servicios',L,y); y+=9;
+  F('bold',22,NAVY); doc.splitTextToSize(title,W).forEach(l=>{ doc.text(l,L,y); y+=mm(22)*1.25; });
+  F('italic',12,GRAY); doc.text('Sistema de gestión de consultas, postulantes y pagos',L,y+1); y+=9;
+  doc.setDrawColor(...NAVY); doc.setLineWidth(.6); doc.line(L,y,L+W,y); y+=8;
+  [['Cliente',client],['Preparado por',brand],['Fecha',fecha],['Plan propuesto',pName(p)],['Validez de la oferta',(P.validity||'').trim()||'---']].forEach(([k,v])=>{ F('normal',11,GRAY); doc.text(k,L,y); F('normal',11,INK); doc.text(String(v),L+48,y); y+=6.4; });
+  y+=4; doc.setDrawColor(...RULE); doc.setLineWidth(.3); doc.line(L,y,L+W,y); y+=9;
+  para((P.intro||'').trim()||PDF_INTRO(),{sz:11.5});
   // ---- secciones
-  if(on('plan')){ sec(T('pdf.s1','Plan propuesto')); const rows=[[T('s13.k','Plan'),pName(p)],[T('pdf.pr','Inversión'),pPrice(p)],[T('s12.pz','Plazo de entrega'),pPlazo(p)],[T('s13.mm','Módulos incluidos'),MODS.filter(m=>S.mods[m.k]&&tierOf(m)!=='X').map(modN).join(', ')||'---']];
-    if(addOns().length) rows.push([T('pdf.ad','Adicionales'),addOns().map(modN).join(', ')+'  ·  '+dash(S.cfg.price.X)]); table(['Concepto','Detalle'],rows,[.32,.68]); }
+  if(on('plan')){ sec(T('pdf.s1','Plan propuesto')); const rows=[['Plan',pName(p)],['Inversión',pPrice(p)],['Plazo de entrega',pPlazo(p)],['Módulos incluidos',MODS.filter(m=>S.mods[m.k]&&tierOf(m)!=='X').map(modN).join(', ')||'---']];
+    if(addOns().length) rows.push(['Módulos adicionales',addOns().map(modN).join(', ')+' ('+dash(S.cfg.price.X)+')']); table(['Concepto','Detalle'],rows,[.32,.68]); }
   if(on('diag')){ const r=calcR(), rows=[];
-    if(r.horas!=null) rows.push([T('pdf.d1','Horas al mes en búsquedas y reportes'),fx(r.horas)+' h'+(r.bsT!=null?`  ·  Bs ${fmt(r.bsT)}`:'')]);
-    if(r.sin!=null) rows.push([T('pdf.d2','Consultas al mes sin seguimiento'),fx(r.sin)+(r.perd!=null?`  ·  ${fx(r.perd)} inscritos posibles`:'')+(r.bsP!=null?`  ·  Bs ${fmt(r.bsP)}`:'')]);
-    if(r.resp!=null) rows.push([T('pdf.d3','Tiempo de respuesta actual'),fx(r.resp)+' h  ·  meta: menos de 1 h']);
-    if(rows.length){ sec(T('pdf.sd','Diagnóstico')); para(T('pdf.sdp','Estimación hecha con los datos que compartieron durante la reunión.'),{sz:11,col:MUT,st:'italic'}); table(['Indicador','Resultado'],rows,[.5,.5]); } }
-  if(on('resp')){ const qa=S.qs.filter(q=>String(S.ans[q.id]??'').trim()); if(qa.length){ sec(T('pdf.sr','Lo que conversamos'));
-    GRP.forEach(([g,n])=>{ const l=qa.filter(q=>q.g===g); if(!l.length) return; brk(28); F('bold',12,C4); doc.text(T('q.g.'+g,n),L,y); y+=6.5; l.forEach(q=>{ brk(16); para(q.t,{sz:11,col:MUT,st:'italic',ind:4,after:.5}); para(String(S.ans[q.id]).trim()+(q.k==='num'&&q.u?' '+q.u:''),{sz:11.5,ind:4,after:3}); }); }); } }
-  if(on('mods')){ const ms=MODS.filter(m=>S.mods[m.k]); if(ms.length){ sec(T('pdf.s2','Módulos y funciones'));
-    ms.forEach(m=>{ brk(26); F('bold',13,C5); doc.text(modN(m),L,y); const tag=`${tierN(tierOf(m))}  ·  Dificultad ${DIFN[difOf(m)].toLowerCase()}  ·  ${wkOf(m)}`; F('italic',10,MUT); doc.text(tag,L+W,y,{align:'right'}); y+=6;
-      para(T('m.'+m.k+'.d',m.d),{sz:11,col:MUT,after:2}); m.f.forEach((f,j)=>bullet(T('m.'+m.k+'.f'+j,f),T('m.'+m.k+'.fd'+j,(m.fd||[])[j]||''))); y+=3; }); } }
+    if(r.horas!=null) rows.push(['Horas mensuales en búsqueda de historiales y reportes',fx(r.horas)+' h'+(r.bsT!=null?`, equivalentes a Bs ${fmt(r.bsT)}`:'')]);
+    if(r.sin!=null) rows.push(['Consultas mensuales sin seguimiento',fx(r.sin)+(r.perd!=null?`, con ${fx(r.perd)} inscripciones potenciales`:'')+(r.bsP!=null?` (Bs ${fmt(r.bsP)})`:'')]);
+    if(r.resp!=null) rows.push(['Tiempo actual de primera respuesta',fx(r.resp)+' h. Objetivo: menos de 1 h']);
+    if(rows.length){ sec(T('pdf.sd','Diagnóstico preliminar')); para('Estimación elaborada con la información proporcionada por el cliente. Las cifras se ajustarán en la etapa de diagnóstico.',{sz:11}); table(['Indicador','Resultado'],rows,[.55,.45],{first:false}); } }
+  if(on('resp')){ const qa=S.qs.filter(q=>String(S.ans[q.id]??'').trim()); if(qa.length){ sec('Información relevada');
+    table(['Consulta','Respuesta'],qa.map(q=>[q.t,String(S.ans[q.id]).trim()+(q.k==='num'&&q.u?' '+q.u:'')]),[.6,.4],{first:false}); } }
+  if(on('mods')){ const ms=MODS.filter(m=>S.mods[m.k]); if(ms.length){ sec('Alcance: módulos y funciones');
+    ms.forEach(m=>{ subN++; brk(30); F('bold',12,INK); doc.text(`${secN}.${subN}  ${modN(m)}`,L,y); F('normal',10,GRAY); doc.text(`${tierN(tierOf(m))}. Dificultad ${DIFN[difOf(m)].toLowerCase()}. Plazo estimado: ${wkOf(m)}.`,L+W,y,{align:'right'}); y+=6.5;
+      para(MDP[m.k]||T('m.'+m.k+'.d',m.d),{sz:11,col:GRAY,after:2});
+      m.f.forEach((f,j)=>{ const nm=T('m.'+m.k+'.f'+j,f), d=T('m.'+m.k+'.fd'+j,(m.fd||[])[j]||''); brk(12); F('normal',11,INK); doc.text(String.fromCharCode(97+j)+')',L+4,y); F('bold',11,INK); doc.text(nm,L+11,y); y+=mm(11)*1.5; if(d) para(d,{sz:11,ind:11,after:1.5}); }); y+=3; }); } }
   if(on('medida')){ const av=S.avisos.filter(a=>a.on), pg=S.progs.filter(a=>a.on), pr=S.prio.map(k=>MODS.find(m=>m.k===k)).filter(Boolean);
-    if(av.length||pg.length||pr.length){ sec(T('sm.h','A su medida')); const rows=[]; if(pg.length) rows.push([T('sm.c2','Sus programas'),pg.map(a=>a.t).join(', ')]); if(av.length) rows.push([T('sm.c1','Avisos'),av.map(a=>a.t).join(', ')]); if(pr.length) rows.push([T('sm.c3','Prioridades'),pr.map((m,i)=>`${i+1}. ${modN(m)}`).join('   ')]); table(['Tema','Elección'],rows,[.3,.7]); } }
-  if(on('reqs')&&S.reqs.length){ sec(T('s13.rq','Pedidos especiales')); S.reqs.forEach(r=>bullet(r,'')); }
-  if(on('etapas')){ sec(T('pdf.s3','Etapas y tiempos')); table(['Etapa','Qué pasa','Tiempo'],PHASES.map((ph,i)=>[`${i+1}. ${T('s14.p'+i,ph)}`,[ 'Revisamos con ustedes cómo trabajan hoy y qué priorizar.','Definimos pantallas, campos y flujos antes de construir.','Entregamos por partes; cada parte se prueba funcionando.','Capacitamos por rol y cargamos su historial de interesados.','Ajustes, soporte y mejoras durante el uso real.'][i]||'',dash(S.cfg.phase[i])]),[.3,.5,.2]); }
-  if(on('recibe')){ sec(T('s11.h','Lo que Educultura recibe')); G6.forEach(g=>bullet(T(g[1]+'t',g[2]),T(g[1]+'d',g[3]))); }
-  [['acuerdos','s15.a','Acuerdos'],['pedidos','s15.b','Pedidos y sugerencias'],['dudas','s15.c','Dudas'],['pasos','s15.d','Próximos pasos']].filter(n=>on(n[0])&&(S.notes[n[0]]||'').trim()).forEach(n=>{ sec(T(n[1],n[2])); para(S.notes[n[0]].trim(),{sz:11.5}); });
+    if(av.length||pg.length||pr.length){ sec('Configuración solicitada'); const rows=[]; if(pg.length) rows.push(['Programas',pg.map(a=>a.t).join(', ')]); if(av.length) rows.push(['Avisos',av.map(a=>a.t).join(', ')]); if(pr.length) rows.push(['Prioridad de implementación',pr.map((m,i)=>`${i+1}. ${modN(m)}`).join('; ')]); table(['Tema','Detalle'],rows,[.32,.68]); } }
+  if(on('reqs')&&S.reqs.length){ sec('Requerimientos adicionales'); S.reqs.forEach((r,i)=>para(`${i+1}. ${r}`,{sz:11.5,after:1.5,just:false})); }
+  if(on('etapas')){ sec('Etapas y cronograma'); table(['Etapa','Descripción','Duración'],PHASES.map((ph,i)=>[`${i+1}. ${T('s14.p'+i,ph)}`,['Revisión conjunta del proceso actual y definición de prioridades.','Definición de pantallas, campos y flujos antes de la construcción.','Desarrollo por entregas parciales; cada entrega se valida en funcionamiento.','Capacitación por rol y migración del historial de interesados.','Soporte, ajustes y mejoras durante el uso del sistema.'][i]||'',dash(S.cfg.phase[i])]),[.3,.5,.2]); }
+  if(on('recibe')){ sec('Entregables y condiciones'); table(['Concepto','Detalle'],G6.map(g=>[T(g[1]+'t',g[2]),T(g[1]+'d',g[3])]),[.32,.68]); }
+  [['acuerdos','s15.a','Acuerdos'],['pedidos','s15.b','Pedidos y sugerencias'],['dudas','s15.c','Consultas pendientes'],['pasos','s15.d','Próximos pasos']].filter(n=>on(n[0])&&(S.notes[n[0]]||'').trim()).forEach(n=>{ sec(T('pdf.n.'+n[0],n[2])); para(S.notes[n[0]].trim(),{sz:11.5}); });
   // ---- cierre y firma
-  y+=6; brk(40); para((P.closing||'').trim()||PDF_CLOSE,{sz:12,after:12});
-  doc.setDrawColor(...C5); doc.setLineWidth(.3); doc.line(L,y,L+60,y); y+=5.5; F('bold',11.5,C5); doc.text(`Equipo ${brand}`,L,y); y+=5; F('italic',10.5,MUT); doc.text('Cochabamba, Bolivia',L,y);
-  // ---- encabezado y pie en todas las páginas
-  const contact=(P.contact||'').trim()||`${mark} · ${brand} · Cochabamba, Bolivia`; const n=doc.getNumberOfPages();
+  y+=4; brk(46); para((P.closing||'').trim()||PDF_CLOSE,{sz:11.5,after:8}); F('normal',11.5,INK); doc.text('Atentamente,',L,y); y+=20;
+  doc.setDrawColor(...INK); doc.setLineWidth(.3); doc.line(L,y,L+62,y); y+=5.5; F('bold',11.5,INK); doc.text(brand,L,y); y+=5; F('normal',10.5,GRAY); doc.text('Cochabamba, Bolivia',L,y);
+  // ---- encabezado y pie
+  const contact=(P.contact||'').trim()||`${brand} · Cochabamba, Bolivia`; const n=doc.getNumberOfPages();
   for(let i=1;i<=n;i++){ doc.setPage(i);
-    doc.setFillColor(...C5); doc.roundedRect(L,11,12,12,2.6,2.6,'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(255,255,255); doc.text(mark,L+6,18.6,{align:'center'});
-    F('bold',13,C5); doc.text(brand,L+15.5,16.8); F('italic',8.5,MUT); doc.text('Plataformas de gestión y análisis de datos',L+15.5,21.3);
-    F('normal',9,MUT); doc.text(`Propuesta para ${client}`,L+W,16.8,{align:'right'}); doc.text(fecha,L+W,21.3,{align:'right'});
-    doc.setDrawColor(...C4); doc.setLineWidth(.6); doc.line(L,27,L+28,27); doc.setDrawColor(...LINE); doc.setLineWidth(.25); doc.line(L+28,27,L+W,27);
-    doc.setDrawColor(...LINE); doc.line(L,281,L+W,281); F('normal',8.5,MUT); doc.text(contact,L,286.5); F('italic',8.5,MUT); doc.text('Documento confidencial',PW/2,286.5,{align:'center'}); F('bold',8.5,C5); doc.text(`Página ${i} de ${n}`,L+W,286.5,{align:'right'}); }
+    doc.setFillColor(...NAVY); doc.rect(L,12,10,10,'F'); doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(255,255,255); doc.text(mark,L+5,18.3,{align:'center'});
+    F('bold',12,NAVY); doc.text(brand,L+13,16.6); F('normal',8.5,GRAY); doc.text('Plataformas de gestión y análisis de datos',L+13,20.8);
+    F('normal',9,GRAY); doc.text(`Propuesta para ${client}`,L+W,16.6,{align:'right'}); doc.text(fecha,L+W,20.8,{align:'right'});
+    doc.setDrawColor(...NAVY); doc.setLineWidth(.4); doc.line(L,25.5,L+W,25.5);
+    doc.setDrawColor(...RULE); doc.setLineWidth(.25); doc.line(L,280,L+W,280); F('normal',8.5,GRAY); doc.text(contact,L,285); doc.text(`Página ${i} de ${n}`,L+W,285,{align:'right'}); }
   return doc; }
 async function makePdf(){
   if(!window.jspdf){ toast('No se pudo cargar el generador de PDF'); return; }
