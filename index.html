@@ -448,6 +448,17 @@ body.present.mv .tools,body.present.mv .navb{opacity:1;pointer-events:auto}
 .qwrap{display:grid;grid-template-columns:1fr 460px;gap:34px;margin-top:26px}
 .qlist{display:grid;gap:12px;align-content:start}
 .qc{background:#fff;border-radius:22px;padding:15px 20px;box-shadow:0 10px 28px rgba(31,47,152,.07);display:grid;grid-template-columns:38px 1fr 250px;gap:16px;align-items:center;animation:aRise .55s var(--ease) both}
+.qc{grid-template-columns:38px 1fr!important;align-items:start!important;padding:14px 18px!important}
+.qb2{display:grid;gap:10px}
+.qctl{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.qctl .qtx{flex:1;min-width:240px;width:auto}
+.qrg{display:flex;gap:6px;flex-wrap:wrap}
+.qrg button,.qna{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:7px 12px;font-size:14px;font-weight:700;color:var(--c5);transition:.2s}
+.qrg button.on{background:linear-gradient(135deg,var(--c4),var(--c2));border-color:transparent;color:#fff}
+.qctl .qin input{width:100px;font-size:17px;padding:7px 10px}
+.qna{margin-left:auto;color:var(--mut);background:var(--soft);border-color:transparent}
+.qna.on{background:var(--c5);color:#fff}
+.qc.na .qrg,.qc.na .qin,.qc.na .qtx{opacity:.35;pointer-events:none}
 .qc .nb{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px}
 .qc p{margin:0;font-size:19px;font-weight:600;line-height:1.35;color:var(--txt)}
 .qin{display:flex;align-items:center;gap:10px}
@@ -827,6 +838,11 @@ const Q0=[
  {id:'q21',g:'dec',t:'¿Tienen un rango de inversión pensado para esta primera etapa?',k:'text'},
 ];
 const QMAX=5;
+const RG0={consultas:[['Menos de 100',50],['100 a 300',200],['300 a 1.000',650],['Más de 1.000',1300]],minhist:[['Menos de 1',.5],['1 a 3',2],['3 a 6',4.5],['Más de 6',8]],resp:[['Menos de 1',.5],['1 a 4',2.5],['4 a 12',8],['Más de 24',30]],sinseg:[['Menos de 10',5],['10 a 30',20],['30 a 50',40],['Más de 50',60]],margen:[['Menos de 500',300],['500 a 1.500',1000],['1.500 a 3.000',2250],['Más de 3.000',4000]],conv:[['Menos de 3',2],['3 a 7',5],['7 a 15',11],['Más de 15',20]],horasrep:[['Menos de 10',5],['10 a 30',20],['30 a 60',45],['Más de 60',80]],costoh:[['Menos de 15',10],['15 a 30',22],['30 a 50',40],['Más de 50',60]]};
+Q0.forEach(q=>{ if(q.v&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); });
+const qNA=id=>!!(S.na&&S.na[id]);
+const qHas=id=>qNA(id)||String(S.ans[id]??'').trim()!=='';
+const qShow=q=>qNA(q.id)?T('sq.na','Sin respuesta'):(S.ansR&&S.ansR[q.id]!=null?S.ansR[q.id]+(q.u?' '+q.u:''):String(S.ans[q.id]??'').trim()+(q.k==='num'&&q.u?' '+q.u:''));
 const AV0=['Agenda del día','Consultas repetidas','Documentos por vencer','Cuotas por cobrar','Resumen diario','Consultas nuevas de redes'];
 const PR0=['Intercambio cultural','Idiomas y tours','Pasantías y estudio-trabajo','Viajes y visas','Estudios académicos','Idiomas en el exterior (Route 66)'];
 const G6=[['lock','s11.a','El sistema es suyo','Código, base de datos y accesos a nombre de Educultura.'],['card','s11.b','Pago por tramos','Cada tramo se paga cuando se entrega funcionando.'],['users','s11.c','Equipo capacitado','Capacitación por rol y manual de uso.'],['pin','s11.d','Soporte en Cochabamba','Atención presencial y por WhatsApp.'],['db','s11.e','Respaldo diario','Copias automáticas de toda la información.'],['bookopen','s11.f','Documentación','Para que cualquier técnico pueda continuar.']];
@@ -836,7 +852,7 @@ const PDF_INTRO=()=>`El presente documento detalla la propuesta de ${S.cfg.name|
 const PDF_CLOSE='Quedamos a disposición para resolver cualquier consulta sobre esta propuesta y coordinar la fecha de inicio del proyecto.';
 const PAGE0='#e8edf8';
 const PRESETS=[['Océano (actual)',PAL0,PAGE0],['Mandarina y marino',['#FF9B54','#FF6A00','#2C6E9A','#2C6E9A','#0A2342'],'#E9EEF5'],['Arrecife y coral',['#6FE3DF','#FF5D77','#6FE3DF','#0A4A6A','#111827'],'#EAFCFF'],['Cielo dorado',['#8ECAE6','#FFB703','#8ECAE6','#219EBC','#2B2D42'],'#FBF8CC'],['Vidrio costero',['#7FE3D6','#1D8EA6','#7FE3D6','#1D8EA6','#0B3A53'],'#F5F7FA'],['Lavanda y menta',['#C9B3FF','#A6F2CF','#A6F2CF','#C9B3FF','#6B6F8A'],'#F5EAFF']];
-const DEF=()=>({page:PAGE0,texts:{},colors:[...PAL0],cfg:{mark:'DC',name:'DataCocha',client:'Educultura',price:{B:'',E:'',A:'',X:''},plazo:{B:'',E:'',A:''},phase:['','','','','']},v:2,mods:Object.fromEntries(MODS.map(m=>[m.k,false])),reqs:[],notes:{},hidden:['hora','vimos','postulante','recibe'],qs:Q0.map(q=>({...q})),ans:{},avisos:AV0.map(t=>({t,on:false})),progs:PR0.map(t=>({t,on:false})),prio:[],resp:{},mcfg:{},bubble:true,qv:3,cliColor:3,spot:true,pdf:{title:'',intro:'',closing:'',validity:'',contact:'',sec:{...PDFSEC0}}});
+const DEF=()=>({page:PAGE0,texts:{},colors:[...PAL0],cfg:{mark:'DC',name:'DataCocha',client:'Educultura',price:{B:'',E:'',A:'',X:''},plazo:{B:'',E:'',A:''},phase:['','','','','']},v:2,mods:Object.fromEntries(MODS.map(m=>[m.k,false])),reqs:[],notes:{},hidden:['hora','vimos','postulante','recibe'],qs:Q0.map(q=>({...q})),ans:{},avisos:AV0.map(t=>({t,on:false})),progs:PR0.map(t=>({t,on:false})),prio:[],resp:{},mcfg:{},bubble:true,na:{},ansR:{},calc:{pct:100,show:{horas:true,sin:true,resp:true}},qv:4,cliColor:3,spot:true,pdf:{title:'',intro:'',closing:'',validity:'',contact:'',sec:{...PDFSEC0}}});
 let S=DEF();
 const T=(k,d)=>(S.texts[k]!=null&&S.texts[k]!=='')?S.texts[k]:d;
 const t=(k,d,tag='span',cls='')=>`<${tag} class="${cls}" data-k="${k}">${esc(T(k,d))}</${tag}>`;
@@ -876,7 +892,11 @@ SL.push({id:'operacion',title:'Su operación',blobs:[[1260,-380,.6,.5],[-420,640
   <div class="qwrap"><div class="qlist" id="qlist"></div><div class="calc g3" id="calc" data-a="rise" style="--dl:.5s"></div></div>`,
   init(el){ el._g=el._g||'sit'; renderQ(el);
     el.querySelector('#qtabs').addEventListener('click',e=>{const b=e.target.closest('button'); if(!b||editing()) return; el._g=b.dataset.g; renderQ(el);});
-    el.querySelector('#qlist').addEventListener('input',e=>{const x=e.target; if(!x.dataset.q) return; S.ans[x.dataset.q]=x.value; renderQTabs(el); renderCalc(el); save();});
+    el.querySelector('#qlist').addEventListener('input',e=>{const x=e.target; if(!x.dataset.q) return; S.ans[x.dataset.q]=x.value; if(S.ansR) delete S.ansR[x.dataset.q]; if(S.na) delete S.na[x.dataset.q]; const row=x.closest('.qc'); row.classList.remove('na'); $$('.qrg button,.qna',row).forEach(b=>b.classList.remove('on')); renderQTabs(el); renderCalc(el); save();});
+    el.querySelector('#qlist').addEventListener('click',e=>{ if(editing()) return; const b=e.target.closest('button'); if(!b) return;
+      if(b.dataset.qr){ const q=qById(b.dataset.qr), g=q.rg[+b.dataset.j]; if(S.ansR[q.id]===g[0]){ delete S.ansR[q.id]; S.ans[q.id]=''; } else { S.ansR[q.id]=g[0]; S.ans[q.id]=String(g[1]); delete S.na[q.id]; } }
+      else if(b.dataset.na){ const id=b.dataset.na; if(S.na[id]) delete S.na[id]; else { S.na[id]=true; S.ans[id]=''; delete S.ansR[id]; } }
+      else return; renderQ(el); save(); });
     el.querySelector('#qlist').addEventListener('change',e=>{const x=e.target; const q=x.dataset.q&&qById(x.dataset.q); if(q&&q.bub&&x.value.trim()&&S.bubble!==false) popBubble(el,x); }); }});
 const BUBA=[['trend','Pronóstico de demanda por programa'],['users','Segmentación de postulantes'],['chart','Qué influye en que alguien se inscriba'],['route','Árboles de decisión'],['cal','Temporadas altas y bajas'],['grid','Análisis multivariado']];
 function popBubble(el,inp){ el.querySelector('.bbw')?.remove(); const R=el.getBoundingClientRect(), sc=R.width/1600, r=inp.getBoundingClientRect();
@@ -886,13 +906,16 @@ function popBubble(el,inp){ el.querySelector('.bbw')?.remove(); const R=el.getBo
    <div class="bbt">${esc(T('bub.h','Con información desde'))} <b>${esc(yrs)}</b>${esc(T('bub.h2',', se puede ir mucho más lejos'))}</div>`+BUBA.map((b,i)=>{ const a=-90+i*(360/N)+30, dx=Math.cos(a*Math.PI/180)*340, dy=Math.sin(a*Math.PI/180)*175; return `<span class="bbc ${['g1','g2','g4','g3','g2','g1'][i]}" style="--dx:${dx}px;--dy:${dy}px;--bd:${1.15+i*.08}s">${ic(b[0])}${esc(T('bub.'+i,b[1]))}</span>`; }).join('')+`<em class="bbn">${esc(T('bub.n','Lo vemos más adelante'))}</em></div>`;
   el.appendChild(W); const off=()=>{ W.classList.add('out'); setTimeout(()=>W.remove(),500); document.removeEventListener('pointerdown',off,true); };
   setTimeout(()=>document.addEventListener('pointerdown',off,true),600); clearTimeout(el._bt); el._bt=setTimeout(off,10000); }
-function renderQTabs(el){ el.querySelector('#qtabs').innerHTML=GRP.map(([g,n],i)=>{ const qs=S.qs.filter(q=>q.g===g); const ok=qs.filter(q=>String(S.ans[q.id]??'').trim()).length; return `<button data-g="${g}" class="${g===el._g?'on':''}"><em>${i+1}</em>${esc(T('q.g.'+g,n))}<small>${ok}/${qs.length}</small></button>`; }).join(''); }
+function renderQTabs(el){ el.querySelector('#qtabs').innerHTML=GRP.map(([g,n],i)=>{ const qs=S.qs.filter(q=>q.g===g); const ok=qs.filter(q=>qHas(q.id)).length; return `<button data-g="${g}" class="${g===el._g?'on':''}"><em>${i+1}</em>${esc(T('q.g.'+g,n))}<small>${ok}/${qs.length}</small></button>`; }).join(''); }
 function renderQ(el){ if(!el) return; renderQTabs(el); const qs=S.qs.filter(q=>q.g===el._g);
-  el.querySelector('#qlist').innerHTML=qs.length?qs.map((q,i)=>`<div class="qc" style="animation-delay:${i*.07}s"><span class="nb ${['g1','g4','g2','g3'][i%4]}">${i+1}</span><p>${esc(q.t)}</p>${q.k==='num'?`<label class="qin"><input type="number" inputmode="decimal" min="0" step="any" data-q="${q.id}" value="${esc(S.ans[q.id]??'')}" placeholder="0"><span>${esc(q.u||'')}</span></label>`:`<input class="qtx" type="text" data-q="${q.id}" value="${esc(S.ans[q.id]??'')}" placeholder="${esc(T('sq.ph','Respuesta'))}">`}</div>`).join(''):`<p class="lead">${esc(T('sq.empty','Sin preguntas en este grupo.'))}</p>`;
+  el.querySelector('#qlist').innerHTML=qs.length?qs.map((q,i)=>{ const na=qNA(q.id), r=S.ansR&&S.ansR[q.id];
+    const ctl=q.k==='num'?`${(q.rg||[]).length?`<div class="qrg">${q.rg.map((g,j)=>`<button data-qr="${q.id}" data-j="${j}" class="${r===g[0]?'on':''}">${esc(g[0])}</button>`).join('')}</div>`:''}<label class="qin"><input type="number" inputmode="decimal" min="0" step="any" data-q="${q.id}" value="${r!=null?'':esc(S.ans[q.id]??'')}" placeholder="${(q.rg||[]).length?esc(T('sq.ex','Exacto')):'0'}"><span>${esc(q.u||'')}</span></label>`
+      :`<input class="qtx" type="text" data-q="${q.id}" value="${esc(S.ans[q.id]??'')}" placeholder="${esc(T('sq.ph','Respuesta'))}">`;
+    return `<div class="qc ${na?'na':''}" style="animation-delay:${i*.07}s"><span class="nb ${['g1','g4','g2','g3'][i%4]}">${i+1}</span><div class="qb2"><p>${esc(q.t)}</p><div class="qctl">${ctl}<button class="qna ${na?'on':''}" data-na="${q.id}">${esc(T('sq.na','Sin respuesta'))}</button></div></div></div>`; }).join(''):`<p class="lead">${esc(T('sq.empty','Sin preguntas en este grupo.'))}</p>`;
   renderCalc(el); }
-function calcR(){ const a={}; S.qs.forEach(q=>{ if(q.v){ const n=parseFloat(String(S.ans[q.id]??'').replace(',','.')); a[q.v]=isFinite(n)?n:null; } });
-  const r={resp:a.resp};
-  if((a.consultas!=null&&a.minhist!=null)||a.horasrep!=null){ r.horas=(a.consultas!=null&&a.minhist!=null?a.consultas*a.minhist/60:0)+(a.horasrep||0); if(a.costoh!=null) r.bsT=r.horas*a.costoh; }
+function calcR(){ const a={}; let ap=false; S.qs.forEach(q=>{ if(q.v&&!qNA(q.id)){ const n=parseFloat(String(S.ans[q.id]??'').replace(',','.')); a[q.v]=isFinite(n)?n:null; if(a[q.v]!=null&&S.ansR&&S.ansR[q.id]!=null) ap=true; } });
+  const pct=(S.calc&&isFinite(+S.calc.pct))?+S.calc.pct:100; const r={resp:a.resp,approx:ap};
+  if((a.consultas!=null&&a.minhist!=null)||a.horasrep!=null){ r.horas=(a.consultas!=null&&a.minhist!=null?a.consultas*(pct/100)*a.minhist/60:0)+(a.horasrep||0); if(a.costoh!=null) r.bsT=r.horas*a.costoh; }
   if(a.consultas!=null&&a.sinseg!=null){ r.sin=a.consultas*a.sinseg/100; if(a.conv!=null){ r.perd=r.sin*a.conv/100; if(a.margen!=null) r.bsP=r.perd*a.margen; } }
   return r; }
 const fx=n=>n==null?'—':(Math.abs(n)<10&&n%1?n.toFixed(1).replace('.',','):fmt(n));
@@ -903,7 +926,7 @@ function renderCalc(el){ const c=el.querySelector('#calc'); if(!c) return; const
    <div class="cm rsp">${t('sq.c3','Tiempo de respuesta')}
     <div class="rb"><i>${esc(T('sq.hoy','Hoy'))}</i><s><u style="width:${w1}%"></u></s><b>${fx(r.resp)} h</b></div>
     <div class="rb"><i>${esc(T('sq.meta','Meta'))}</i><s><u class="m" style="width:${w2}%"></u></s><b>${esc(T('sq.metav','< 1 h'))}</b></div></div>
-   ${t('sq.n','Calculado con los datos de Educultura.','p','cn')}`; if(editing()) setEditable(c,true); }
+   ${r.approx?t('sq.na2','Aproximado: algunas respuestas son rangos.','p','cn'):t('sq.n','Calculado con los datos de Educultura.','p','cn')}`; if(editing()) setEditable(c,true); }
 
 // 3 La primera hora
 SL.push({id:'hora',title:'La primera hora',blobs:[[-260,-280,.8,.7],[1240,520,.9,.8],[700,760,.4,.5]],html:()=>{
@@ -1330,9 +1353,12 @@ function renderCfg(){ const b=$('#cfgBody'); let h_='';
   if(tab==='txt') h_=`<label class="sw"><span>Editar textos sobre las diapositivas</span><input type="checkbox" id="swEdit" ${editing()?'checked':''}><i></i></label>
     <p class="hint">Con esto activo, haz clic en cualquier texto de las diapositivas y escribe encima. Enter para terminar.</p><div class="grp">Restaurar</div><button class="pbtn" id="rstTxt">Volver a los textos originales</button>`;
   if(tab==='sl') h_=`<div class="grp">Diapositivas visibles</div>${SL.map((s,i)=>`<label class="sw"><span>${i+1}. ${esc(s.title)}</span><input type="checkbox" data-sl="${s.id}" ${isHid(i)?'':'checked'}><i></i></label>`).join('')}<div class="grp">Extras</div><label class="sw"><span>Burbuja de análisis estadístico al responder «desde cuándo guardan información»</span><input type="checkbox" id="swBub" ${S.bubble!==false?'checked':''}><i></i></label><div class="grp">Puntero</div><label class="sw"><span>Luz suave al mover el cursor</span><input type="checkbox" id="swSpot" ${S.spot?'checked':''}><i></i></label><p class="hint">Las ocultas no se borran: se vuelven a mostrar aquí.</p>`;
-  if(tab==='qs') h_=`<div class="grp">Nombres de los grupos</div>${GRP.map(([g,n])=>`<label class="fld"><span>${esc(n)}</span><input type="text" data-gn="${g}" value="${esc(T('q.g.'+g,n))}"></label>`).join('')}
-    <div class="grp">Preguntas</div>${S.qs.map(q=>`<div class="qe"><div class="qer"><select data-qg="${q.id}">${GRP.map(([g,n])=>`<option value="${g}" ${q.g===g?'selected':''}>${esc(T('q.g.'+g,n))}</option>`).join('')}</select>${q.v?'<span class="tagc">Calculadora</span>':`<button class="pbtn sm" data-qd="${q.id}">Quitar</button>`}</div><textarea data-qt="${q.id}" rows="2">${esc(q.t)}</textarea>${q.k==='num'?`<input type="text" data-qu="${q.id}" value="${esc(q.u||'')}" placeholder="Unidad">`:''}</div>`).join('')}
-    <button class="pbtn pr" id="qAdd">Agregar pregunta</button><p class="hint">Máximo 5 preguntas por grupo. Las marcadas con "Calculadora" alimentan los resultados: se puede cambiar su texto, no quitarlas.</p>`;
+  if(tab==='qs') h_=`<div class="grp">Calculadora</div><p class="hint">Horas al mes = consultas al mes × % que requiere buscar historial × minutos por búsqueda ÷ 60, más las horas en reportes. Consultas sin seguimiento = consultas × % sin seguimiento. Inscritos que se van = esas consultas × % que se inscribe.</p>
+    <label class="fld"><span>% de consultas en que se busca el historial</span><input type="text" id="cPct" value="${esc(S.calc.pct)}"></label>
+    ${[['horas','Horas al mes'],['sin','Consultas sin seguimiento'],['resp','Tiempo de respuesta']].map(([k,n])=>`<label class="sw"><span>Mostrar "${n}" en el PDF</span><input type="checkbox" data-cs="${k}" ${S.calc.show[k]!==false?'checked':''}><i></i></label>`).join('')}
+    <div class="grp">Nombres de los grupos</div>${GRP.map(([g,n])=>`<label class="fld"><span>${esc(n)}</span><input type="text" data-gn="${g}" value="${esc(T('q.g.'+g,n))}"></label>`).join('')}
+    <div class="grp">Preguntas</div>${S.qs.map(q=>`<div class="qe"><div class="qer"><select data-qg="${q.id}">${GRP.map(([g,n])=>`<option value="${g}" ${q.g===g?'selected':''}>${esc(T('q.g.'+g,n))}</option>`).join('')}</select>${q.v?'<span class="tagc">Calculadora</span>':`<select data-qk="${q.id}"><option value="text" ${q.k!=='num'?'selected':''}>Texto</option><option value="num" ${q.k==='num'?'selected':''}>Número con rangos</option></select><button class="pbtn sm" data-qd="${q.id}">Quitar</button>`}</div><textarea data-qt="${q.id}" rows="2">${esc(q.t)}</textarea>${q.k==='num'?`<input type="text" data-qu="${q.id}" value="${esc(q.u||'')}" placeholder="Unidad (ej. consultas, Bs, %)"><textarea data-qrg="${q.id}" rows="4" placeholder="Un rango por línea: etiqueta = valor">${esc((q.rg||[]).map(g=>g[0]+' = '+g[1]).join('\n'))}</textarea>`:''}</div>`).join('')}
+    <button class="pbtn pr" id="qAdd">Agregar pregunta</button><p class="hint">Máximo 5 preguntas por grupo. En los rangos, cada línea es "etiqueta = valor"; el valor es el que usa la calculadora (por ejemplo "100 a 300 = 200"). Las marcadas con "Calculadora" alimentan los resultados: se puede cambiar su texto y sus rangos, no quitarlas.</p>`;
   if(tab==='op') h_=`<div class="grp">Avisos de WhatsApp</div>${lst('av',S.avisos)}<div class="grp">Programas</div>${lst('pg',S.progs)}<p class="hint">Aparecen en la diapositiva "A su medida".</p>`;
   if(tab==='pdf') h_=`<p class="hint">Esto solo se ve en el PDF, no en la presentación.</p><div class="grp">Textos</div>${pf('title','Título',`Propuesta para ${S.cfg.client||''}`)}${pf('intro','Introducción',PDF_INTRO(),1)}${pf('closing','Cierre',PDF_CLOSE,1)}${pf('validity','Vigencia (vacío no aparece)','---')}${pf('contact','Contacto',`${S.cfg.mark||'DC'} · ${S.cfg.name||''} · Cochabamba, Bolivia`)}
     <div class="grp">Qué incluye</div>${PDFSEC.map(([k,n])=>`<label class="sw"><span>${esc(n)}</span><input type="checkbox" data-ps="${k}" ${S.pdf.sec[k]?'checked':''}><i></i></label>`).join('')}<button class="pbtn pr" id="pdfNow">Descargar PDF</button>`;
@@ -1344,6 +1370,8 @@ $('#cfgBody').addEventListener('input',e=>{ const x=e.target;
   if(x.dataset.gn){ S.texts['q.g.'+x.dataset.gn]=x.value; refreshDyn(); save(); }
   if(x.dataset.qt){ qById(x.dataset.qt).t=x.value; refreshDyn(); save(); }
   if(x.dataset.qu){ qById(x.dataset.qu).u=x.value; refreshDyn(); save(); }
+  if(x.dataset.qrg){ qById(x.dataset.qrg).rg=x.value.split('\n').map(l=>l.split('=')).filter(p=>p.length===2&&p[0].trim()&&isFinite(parseFloat(p[1].replace(',','.')))).map(p=>[p[0].trim(),parseFloat(p[1].replace(',','.'))]).slice(0,6); refreshDyn(); save(); }
+  if(x.id==='cPct'){ const v=parseFloat(x.value.replace(',','.')); if(isFinite(v)){ S.calc.pct=Math.max(0,Math.min(100,v)); refreshDyn(); save(); } }
   if(x.dataset.ave!=null){ S.avisos[+x.dataset.ave].t=x.value; refreshDyn(); save(); }
   if(x.dataset.pge!=null){ S.progs[+x.dataset.pge].t=x.value; refreshDyn(); save(); }
   if(x.dataset.pf){ S.pdf[x.dataset.pf]=x.value; save(); }
@@ -1352,6 +1380,8 @@ $('#cfgBody').addEventListener('input',e=>{ const x=e.target;
   if(x.dataset.c){ S.colors[+x.dataset.c]=x.value; const tx=$(`[data-ch="${x.dataset.c}"]`); if(tx) tx.value=x.value; applyColors(); save(); }
   if(x.dataset.ch&&/^#[0-9a-f]{6}$/i.test(x.value)){ S.colors[+x.dataset.ch]=x.value; const cc=$(`[data-c="${x.dataset.ch}"]`); if(cc) cc.value=x.value; applyColors(); save(); } });
 $('#cfgBody').addEventListener('change',e=>{ const x=e.target; if(x.id==='swEdit') setEdit(x.checked);
+  if(x.dataset.qk){ const q=qById(x.dataset.qk); q.k=x.value; if(q.k==='num'&&!q.rg) q.rg=[]; refreshDyn(); renderCfg(); save(); }
+  if(x.dataset.cs){ S.calc.show[x.dataset.cs]=x.checked; save(); }
   if(x.dataset.mt||x.dataset.md){ const k=x.dataset.mt||x.dataset.md; S.mcfg[k]={...(S.mcfg[k]||{}),[x.dataset.mt?'t':'dif']:x.dataset.mt?x.value:+x.value}; const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); save(); }
   if(x.dataset.qg){ if(S.qs.filter(q=>q.g===x.value).length>=QMAX){ toast('Ese grupo ya tiene 5 preguntas'); x.value=qById(x.dataset.qg).g; return; } qById(x.dataset.qg).g=x.value; refreshDyn(); save(); }
   if(x.dataset.sl){ const id=x.dataset.sl; S.hidden=S.hidden.filter(h_=>h_!==id); if(!x.checked) S.hidden.push(id); if(SL.every((s,i)=>isHid(i))){ S.hidden=S.hidden.filter(h_=>h_!==id); x.checked=true; } renderDots(); if(isHid(cur)){ const n=nextI(1); go(n!==cur?n:nextI(-1)); } save(); }
@@ -1380,7 +1410,7 @@ function save(){ clearTimeout(saveT); st('Guardando…'); saveT=setTimeout(async
   try{ localStorage.setItem('dc-edu',state); }catch(e){}
   if(db){ try{ await db.doc(DOC).set({state,updatedAt:Date.now()}); st('Guardado'); }catch(e){ st('Guardado en este navegador'); } } else st('Guardado en este navegador'); saveT=null; },700); }
 function load(d){ if(!d) return; const b=DEF(); S={...b,...d,page:d.page||PAGE0,cfg:{...b.cfg,...(d.cfg||{}),price:{...b.cfg.price,...((d.cfg||{}).price||{})},plazo:{...b.cfg.plazo,...((d.cfg||{}).plazo||{})},phase:((d.cfg||{}).phase||b.cfg.phase)},mods:d.v?{...b.mods,...(d.mods||{})}:b.mods,v:2,texts:d.texts||{},reqs:d.reqs||[],notes:d.notes||{},colors:(d.colors&&d.colors.length===5)?d.colors:b.colors};
-  S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qv=3; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
+  S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; S.na=d.na||{}; S.ansR=d.ansR||{}; S.calc={pct:100,...(d.calc||{}),show:{horas:true,sin:true,resp:true,...((d.calc||{}).show||{})}}; if((d.qv||0)<4){ S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
 
 /* PDF */
 const MDP={cons:'Registro centralizado de todas las consultas recibidas, con su canal de origen y fecha, evitando registros duplicados.',seg:'Control del historial de cada interesado y de los próximos contactos programados, para que ninguna consulta quede sin respuesta.',pos:'Gestión de los postulantes por programa, con sus requisitos, convocatorias y estado de avance.',doc:'Archivo digital de la documentación de cada postulante, con alertas de vencimiento y registro de citas consulares.',pag:'Registro de planes de pago, cuotas, saldos y emisión de recibos.',rep:'Indicadores de gestión actualizados sobre consultas, conversión y desempeño por canal y asesor.',wa:'Automatización de mensajes por la vía oficial de WhatsApp Business: primera respuesta, seguimientos programados y avisos al asesor.',r66:'Gestión de los programas de idiomas en el exterior, con control de cupos, límites de edad y seguimiento hasta el viaje.'};
@@ -1416,12 +1446,13 @@ function buildPdf(){
   if(on('plan')){ sec(T('pdf.s1','Plan propuesto')); const rows=[['Plan',pName(p)],['Inversión',pPrice(p)],['Plazo de entrega',pPlazo(p)],['Módulos incluidos',MODS.filter(m=>S.mods[m.k]&&tierOf(m)!=='X').map(modN).join(', ')||'---']];
     if(addOns().length) rows.push(['Módulos adicionales',addOns().map(modN).join(', ')+' ('+dash(S.cfg.price.X)+')']); table(['Concepto','Detalle'],rows,[.32,.68]); }
   if(on('diag')){ const r=calcR(), rows=[];
-    if(r.horas!=null) rows.push(['Horas mensuales en búsqueda de historiales y reportes',fx(r.horas)+' h'+(r.bsT!=null?`, equivalentes a Bs ${fmt(r.bsT)}`:'')]);
-    if(r.sin!=null) rows.push(['Consultas mensuales sin seguimiento',fx(r.sin)+(r.perd!=null?`, con ${fx(r.perd)} inscripciones potenciales`:'')+(r.bsP!=null?` (Bs ${fmt(r.bsP)})`:'')]);
-    if(r.resp!=null) rows.push(['Tiempo actual de primera respuesta',fx(r.resp)+' h. Objetivo: menos de 1 h']);
-    if(rows.length){ sec(T('pdf.sd','Diagnóstico preliminar')); para('Estimación elaborada con la información proporcionada por el cliente. Las cifras se ajustarán en la etapa de diagnóstico.',{sz:11}); table(['Indicador','Resultado'],rows,[.55,.45],{first:false}); } }
-  if(on('resp')){ const qa=S.qs.filter(q=>String(S.ans[q.id]??'').trim()); if(qa.length){ sec('Información relevada');
-    table(['Consulta','Respuesta'],qa.map(q=>[q.t,String(S.ans[q.id]).trim()+(q.k==='num'&&q.u?' '+q.u:'')]),[.6,.4],{first:false}); } }
+    const sh=S.calc.show||{}; if(r.horas!=null&&sh.horas!==false) rows.push(['Horas mensuales en búsqueda de historiales y reportes',fx(r.horas)+' h'+(r.bsT!=null?`, equivalentes a Bs ${fmt(r.bsT)}`:'')]);
+    if(r.sin!=null&&sh.sin!==false) rows.push(['Consultas mensuales sin seguimiento',fx(r.sin)+(r.perd!=null?`, con ${fx(r.perd)} inscripciones potenciales`:'')+(r.bsP!=null?` (Bs ${fmt(r.bsP)})`:'')]);
+    if(r.resp!=null&&sh.resp!==false) rows.push(['Tiempo actual de primera respuesta',fx(r.resp)+' h. Objetivo: menos de 1 h']);
+    if(rows.length){ sec(T('pdf.sd','Diagnóstico preliminar')); para('Estimación elaborada con la información proporcionada por el cliente'+(r.approx?', en parte expresada en rangos aproximados':'')+'. Las cifras se ajustarán en la etapa de diagnóstico.',{sz:11}); table(['Indicador','Resultado'],rows,[.55,.45],{first:false}); } }
+  if(on('resp')){ const qa=S.qs.filter(q=>qHas(q.id)&&!qNA(q.id)), qn=S.qs.filter(q=>qNA(q.id)); if(qa.length||qn.length){ sec('Información relevada');
+    if(qa.length) table(['Consulta','Respuesta'],qa.map(q=>[q.t,qShow(q)]),[.6,.4],{first:false});
+    if(qn.length){ para('Los siguientes puntos quedaron sin respuesta y se medirán durante la etapa de diagnóstico:',{sz:11.5,after:2}); qn.forEach((q,i)=>para(`${i+1}. ${q.t}`,{sz:11,ind:4,after:1,just:false})); y+=2; } } }
   if(on('mods')){ const ms=MODS.filter(m=>S.mods[m.k]); if(ms.length){ sec('Alcance: módulos y funciones');
     ms.forEach(m=>{ subN++; brk(30); F('bold',12,INK); doc.text(`${secN}.${subN}  ${modN(m)}`,L,y); F('normal',10,GRAY); doc.text(`${tierN(tierOf(m))}. Dificultad ${DIFN[difOf(m)].toLowerCase()}. Plazo estimado: ${wkOf(m)}.`,L+W,y,{align:'right'}); y+=6.5;
       para(MDP[m.k]||T('m.'+m.k+'.d',m.d),{sz:11,col:GRAY,after:2});
