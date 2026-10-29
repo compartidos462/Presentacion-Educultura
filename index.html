@@ -846,6 +846,12 @@ body.cfgon .tools{right:calc(min(400px,100vw) + 14px)}
 .phole small.ok{background:#DDF5E8;color:#1E8A4F!important;animation:svPop .45s cubic-bezier(.34,1.56,.64,1)}
 .mj{transition:transform .25s var(--ease)}.mj:hover{transform:translateX(4px)}
 .mj .ci{animation:svPop .5s cubic-bezier(.34,1.56,.64,1) calc(var(--d) + .2s) both}
+
+.mch{display:flex;align-items:center;gap:6px}.mch b{flex:1}
+.mch select{border:1.5px solid var(--line);border-radius:10px;padding:5px 6px;font-size:12.5px;background:#fff;max-width:110px}
+#modAdd{margin:4px 0 12px}
+.mg.many{grid-template-columns:repeat(5,1fr);gap:10px}.mg.many .mt{min-height:150px;padding:14px}.mg.many .mt b{font-size:16px}
+.mg.many2{grid-template-columns:repeat(5,1fr);gap:8px}.mg.many2 .mt{min-height:112px;padding:10px 12px;gap:6px}.mg.many2 .mt b{font-size:14.5px}.mg.many2 .mt .bub{width:38px;height:38px;font-size:18px;border-radius:12px}.mg.many2 .mt>span:not(.bub){display:none}
 </style>
 
 <div id="view"><div id="stage"><div class="bg" id="bg"></div><div id="slides"></div></div></div>
@@ -916,7 +922,7 @@ const ic=(n,c='')=>`<svg class="ic ${c}" viewBox="0 0 24 24" aria-hidden="true">
 
 /* ================= Estado ================= */
 const PAL0=['#7BD5F5','#787FF6','#4ADEDE','#1CA7EC','#1F2F98'];
-const MODS=[
+const MODS0=[
  {k:'cons',ic:'inbox',n:'Consultas',t:'B',dif:1,wk:'2 semanas',d:'Cada consulta entra con su canal y su fecha, sin duplicados.',f:['Registro rápido desde cualquier canal','Origen de cada consulta','Detección de duplicados','Formularios web conectados'],fd:['Un formulario corto para anotar a quien escribe por WhatsApp, TikTok, Facebook, Instagram o la web, en menos de un minuto.','Cada ficha guarda por dónde llegó la persona; así se ve qué canal trae más interesados.','Si el número o el nombre ya existe, el sistema avisa y suma la consulta a la ficha que ya hay.','Los formularios del sitio web cargan la consulta directo en la base, sin copiar a mano.']},
  {k:'seg',ic:'route',n:'Seguimiento',t:'B',dif:2,wk:'3 semanas',d:'Nadie se queda sin respuesta ni sin próximo contacto.',f:['Ficha única con historial','Contador de 1ª, 2ª y 3ª consulta','Grado de interés','Recordatorios y agenda del asesor'],fd:['Todo lo que se habló con una persona, en orden y en un solo lugar.','Se ve cuántas veces volvió a escribir y cuándo fue la última.','Frío, tibio o caliente: el asesor marca qué tan cerca está de inscribirse.','Cada interesado tiene fecha de próximo contacto y aparece en la agenda del día.']},
  {k:'pos',ic:'ucheck',n:'Postulantes',t:'E',dif:2,wk:'3 semanas',d:'Cada postulante con su programa, requisitos y estado.',f:['Programas, convocatorias y cupos','Requisitos por programa','Estado hasta el viaje'],fd:['Cada programa con sus fechas de convocatoria y los cupos disponibles.','Edad, idioma y documentos que pide cada programa; el sistema avisa si alguien deja de cumplirlos.','De la postulación al viaje: en qué etapa está cada postulante.']},
@@ -926,6 +932,9 @@ const MODS=[
  {k:'wa',ic:'chat',n:'WhatsApp automático',t:'A',dif:3,wk:'4 semanas',d:'El primer mensaje y los recordatorios salen solos.',f:['WhatsApp Business oficial','Primer mensaje automático','Seguimiento día 1, 3 y 7','Avisos al asesor y campañas'],fd:['Conexión por la vía oficial de WhatsApp, pensada para enviar a muchos contactos sin bloqueos.','Quien escribe recibe respuesta al instante, a cualquier hora.','Si no responde, el sistema le vuelve a escribir en los días que definan.','Aviso al asesor cuando un interesado responde y promociones a quienes aceptaron recibirlas.']},
  {k:'r66',ic:'book',n:'Idiomas en el exterior',t:'X',dif:1,wk:'1 semana',d:'Programas de inglés en Inglaterra (Route 66) con su propio seguimiento.',f:['Convocatorias y cupos','Límite de edad por programa','Seguimiento hasta el viaje'],fd:['Fechas y cupos de los cursos en Inglaterra.','El sistema avisa si un interesado se pasa de la edad del programa.','Del interés al viaje, con sus documentos y pagos.']},
 ];
+let MODS=MODS0.slice();
+const MICONS=['grid','inbox','route','ucheck','file','card','chart','chat','book','bell','shield','clock','plane','globe','users','cal','cap','monitor','db','lock','pin','trend','video','camera'];
+function syncMods(){ MODS=MODS0.concat((S.cmods||[]).map(c=>({dif:1,wk:'1 semana',f:[],fd:[],...c}))); MODS.forEach(m=>{ if(S.mods&&S.mods[m.k]==null) S.mods[m.k]=false; }); }
 const DIFN=['','Baja','Media','Alta'];
 const fnRaw=m=>{ const o=S.mcfg&&S.mcfg[m.k]&&S.mcfg[m.k].f; return Array.isArray(o)?o.map(x=>[x[0]||'',x[1]||'']):m.f.map((f,j)=>[f,(m.fd||[])[j]||'']); };
 const fnOf=m=>fnRaw(m).map((x,j)=>[T('m.'+m.k+'.f'+j,x[0]),T('m.'+m.k+'.fd'+j,x[1])]);
@@ -972,7 +981,7 @@ const PDF_INTRO=()=>`El presente documento detalla la propuesta de ${S.cfg.name|
 const PDF_CLOSE='Quedamos a disposición para resolver cualquier consulta sobre esta propuesta y coordinar la fecha de inicio del proyecto.';
 const PAGE0='#e8edf8';
 const PRESETS=[['Océano (actual)',PAL0,PAGE0],['Mandarina y marino',['#FF9B54','#FF6A00','#2C6E9A','#2C6E9A','#0A2342'],'#E9EEF5'],['Arrecife y coral',['#6FE3DF','#FF5D77','#6FE3DF','#0A4A6A','#111827'],'#EAFCFF'],['Cielo dorado',['#8ECAE6','#FFB703','#8ECAE6','#219EBC','#2B2D42'],'#FBF8CC'],['Vidrio costero',['#7FE3D6','#1D8EA6','#7FE3D6','#1D8EA6','#0B3A53'],'#F5F7FA'],['Lavanda y menta',['#C9B3FF','#A6F2CF','#A6F2CF','#C9B3FF','#6B6F8A'],'#F5EAFF']];
-const DEF=()=>({page:PAGE0,texts:{},colors:[...PAL0],cfg:{mark:'DC',name:'DataCocha',client:'Educultura',price:{B:'',E:'',A:'',X:''},plazo:{B:'',E:'',A:''},phase:['','','','','']},v:2,mods:Object.fromEntries(MODS.map(m=>[m.k,false])),reqs:[],notes:{},hidden:['hora','vimos','postulante','recibe'],qs:Q0.map(q=>({...q})),ans:{},avisos:AV0.map(t=>({t,on:false})),progs:PR0.map(t=>({t,on:false})),prio:[],resp:{},mcfg:{},bubble:true,autoAnim:false,na:{},ansR:{},sim:{},sysPal:0,sysCus:null,calc:{pct:100,show:{horas:true,sin:true,resp:true}},qv:4,cliColor:3,spot:true,pdf:{title:'',intro:'',closing:'',validity:'',contact:'',sec:{...PDFSEC0}}});
+const DEF=()=>({page:PAGE0,texts:{},colors:[...PAL0],cfg:{mark:'DC',name:'DataCocha',client:'Educultura',price:{B:'',E:'',A:'',X:''},plazo:{B:'',E:'',A:''},phase:['','','','','']},v:2,mods:Object.fromEntries(MODS.map(m=>[m.k,false])),reqs:[],notes:{},hidden:['hora','vimos','postulante','recibe'],qs:Q0.map(q=>({...q})),ans:{},avisos:AV0.map(t=>({t,on:false})),progs:PR0.map(t=>({t,on:false})),prio:[],resp:{},mcfg:{},cmods:[],bubble:true,autoAnim:false,na:{},ansR:{},sim:{},sysPal:0,sysCus:null,calc:{pct:100,show:{horas:true,sin:true,resp:true}},qv:4,cliColor:3,spot:true,pdf:{title:'',intro:'',closing:'',validity:'',contact:'',sec:{...PDFSEC0}}});
 let S=DEF();
 const T=(k,d)=>(S.texts[k]!=null&&S.texts[k]!=='')?S.texts[k]:d;
 const t=(k,d,tag='span',cls='')=>`<${tag} class="${cls}" data-k="${k}">${esc(T(k,d))}</${tag}>`;
@@ -980,7 +989,14 @@ const h=(k,d,tag='h2',cls='tt',a='')=>`<${tag} class="${cls}" data-k="${k}" data
 const dash=v=>(v&&String(v).trim())?String(v).trim():'---';
 const planOf=()=>{ const r=MODS.filter(m=>S.mods[m.k]&&tierOf(m)!=='X').map(m=>RANK[tierOf(m)]); if(!r.length) return null; const mx=Math.max(...r); return mx>=3?'A':mx>=2?'E':'B'; };
 const addOns=()=>MODS.filter(m=>S.mods[m.k]&&tierOf(m)==='X');
-const pName=p=>p?planN(p):T('s13.none','Por elegir'), pPrice=p=>p?dash(S.cfg.price[p]):'---', pPlazo=p=>p?dash(S.cfg.plazo[p]):'---';
+const lst2=a=>a.length<2?(a[0]||''):a.slice(0,-1).join(', ')+' y '+a[a.length-1];
+const wkNum=w=>{ const n=parseFloat(String(w||'').replace(',','.')); if(!isFinite(n)) return 0; return /mes/i.test(w)?n*4:n; };
+const planWk=p=>MODS.filter(m=>tierOf(m)!=='X'&&RANK[tierOf(m)]<=RANK[p]).reduce((a,m)=>a+wkNum(wkOf(m)),0);
+const plazoOf=p=>{ const v=(S.cfg.plazo[p]||'').trim(); if(v) return v; const w=planWk(p); return w?`${String(Math.round(w*10)/10).replace('.',',')} semana${w===1?'':'s'}`:'---'; };
+const planD=p=>{ const own=MODS.filter(m=>tierOf(m)===p).map(modN); const prev={E:'B',A:'E'}[p];
+  const base=prev?(own.length?`${planN(prev)} más ${lst2(own)}.`:`Lo mismo que ${planN(prev)}.`):(own.length?`${lst2(own)}.`:'Sin módulos asignados.');
+  return p==='A'?base+' Puede ir como segunda fase.':base; };
+const pName=p=>p?planN(p):T('s13.none','Por elegir'), pPrice=p=>p?dash(S.cfg.price[p]):'---', pPlazo=p=>p?plazoOf(p):'---';
 const planN=p=>T('plan.'+p+'.n',PLANS.find(x=>x.t===p).n);
 const modN=m=>T('m.'+m.k+'.n',m.n);
 
@@ -1183,10 +1199,10 @@ function setOrd(el,on){ el.classList.toggle('dcm',on); $$('.tog button',el).forE
 // 6 Módulos
 SL.push({id:'modulos',title:'Módulos',blobs:[[1260,-320,.7,.6],[-360,560,.75,.6],[1350,700,.4,.5]],html:()=>{
   const cx=420,cy=330,R=270;
-  return `${h('s6.h','Todo en un solo lugar')}${t('s6.p','Ocho módulos que se activan según lo que Educultura necesite.','p','lead')}
-  <div class="mods"><svg>${MODS.map((m,i)=>{const [x,y]=ang(i,8,R,cx,cy);return `<line class="ln" data-m="${m.k}" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;}).join('')}</svg>
+  return `${h('s6.h','Todo en un solo lugar')}${t('s6.p','Módulos que se activan según lo que Educultura necesite.','p','lead')}
+  <div class="mods"><svg>${MODS.map((m,i)=>{const [x,y]=ang(i,MODS.length,R,cx,cy);return `<line class="ln" data-m="${m.k}" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;}).join('')}</svg>
    <div class="mcore g3" data-a="zoom" style="left:${cx-95}px;top:${cy-95}px;--dl:.3s"><b data-bind="mark"></b></div>
-   ${MODS.map((m,i)=>{const [x,y]=ang(i,8,R,cx,cy);return `<button class="mb" data-m="${m.k}" data-a="pop" style="left:${x-75}px;top:${y-49}px;--dl:${.5+i*.08}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n)}</button>`;}).join('')}</div>
+   ${MODS.map((m,i)=>{const [x,y]=ang(i,MODS.length,R,cx,cy);return `<button class="mb" data-m="${m.k}" data-a="pop" style="left:${x-75}px;top:${y-49}px;--dl:${.5+i*.08}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n)}</button>`;}).join('')}</div>
   <div class="mpanel" data-a="rise" style="--dl:.9s" id="mpanel"></div>`;},
   init(el){ el.querySelector('.mods').addEventListener('click',e=>{const b=e.target.closest('.mb'); if(!b||document.body.classList.contains('edit')) return; el._user=true; clearInterval(el._iv); selMod(el,b.dataset.m);}); },
   enter(el){ clearInterval(el._iv); modIdle(el); },
@@ -1275,7 +1291,7 @@ SL.push({id:'recibe',title:'Lo que recibe',blobs:[[1260,-340,.75,.6],[-380,600,.
 
 // 13 Armemos tu plan
 SL.push({id:'armemos',title:'Armemos tu plan',blobs:[[1300,-360,.65,.5],[-400,640,.6,.5],[1420,700,.3,.4]],html:()=>`${h('s13.h','Armemos tu plan')}${t('s13.p','Elijan los módulos y el plan sale solo. Toquen «Ver» para conocer cada función.','p','lead')}
-  <div class="bld"><div><div class="mg" id="mg">${MODS.map((m,i)=>`<button class="mt" data-m="${m.k}" data-a="pop" style="--dl:${.35+i*.06}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n,'b')}<span>${fnOf(m).length} ${esc(T('s13.fn','funciones'))}</span><em class="inf" data-inf="${m.k}">${esc(T('s13.ver','Ver'))}</em><i class="tg"></i></button>`).join('')}</div>
+  <div class="bld"><div><div class="mg ${MODS.length>8?(MODS.length>10?'many2':'many'):''}" id="mg">${MODS.map((m,i)=>`<button class="mt" data-m="${m.k}" data-a="pop" style="--dl:${.35+i*.06}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n,'b')}<span>${fnOf(m).length} ${esc(T('s13.fn','funciones'))}</span><em class="inf" data-inf="${m.k}">${esc(T('s13.ver','Ver'))}</em><i class="tg"></i></button>`).join('')}</div>
    <div class="req" data-a="rise" style="--dl:.9s"><input id="reqIn" placeholder="${esc(T('s13.ph','Pedido especial de Educultura'))}"><button class="g3" id="reqAdd">${ic('plus')}${esc(T('s13.add','Sumar'))}</button></div><div class="reqs" id="reqs"></div></div>
    <div class="sumc g3" data-a="rise" style="--dl:.5s" id="sumc"></div></div>
   <div class="mdl" id="mdl" hidden><div class="mdc" id="mdc"></div></div>`,
@@ -1311,7 +1327,7 @@ SL.push({id:'planes',title:'Su plan',blobs:[[-380,-340,.7,.55],[1300,640,.65,.6]
   <div class="plans" id="plans">${PLANS.map((p,i)=>`<button class="plan" data-p="${p.t}" data-a="rise" style="--dl:${.4+i*.13}s">
    ${p.t==='A'?`<span class="bdg g3">${esc(T('s12.bdg','Segunda fase posible'))}</span>`:''}<span class="you">${esc(T('s12.you','Su plan'))}</span><div class="hd ${['g1','g2','g3'][i]}"></div>
    ${t('plan.'+p.t+'.n',p.n,'div','pn')}<div class="pp gt" data-bind="price:${p.t}"></div><div class="pz">${esc(T('s12.pz','Plazo'))}: <span data-bind="plazo:${p.t}"></span></div>
-   ${t('plan.'+p.t+'.d',p.d,'div','pd')}
+   ${t('plan.'+p.t+'.d',planD(p.t),'div','pd')}
    <div class="chips">${MODS.filter(m=>tierOf(m)!=='X'&&RANK[tierOf(m)]<=RANK[p.t]).map(m=>`<span data-cm="${m.k}">${ic(m.ic)}${t('m.'+m.k+'.n',m.n)}</span>`).join('')}</div></button>`).join('')}</div>`,
   init(el){ el.querySelector('#plans').addEventListener('click',e=>{const b=e.target.closest('.plan'); if(!b||document.body.classList.contains('edit')) return; setPlan(b.dataset.p);}); }});
 function setPlan(p){ MODS.forEach(m=>{ if(tierOf(m)!=='X') S.mods[m.k]=RANK[tierOf(m)]<=RANK[p]; }); syncPlan(); save(); }
@@ -1407,7 +1423,7 @@ $('#bg').innerHTML=BLOB.map((g,i)=>`<div class="blob"><svg viewBox="40 40 440 42
 let DEFORD=null;
 function applyOrder(){ if(!DEFORD) DEFORD=SL.map(s=>s.id); const o=S.order||[]; const pos=id=>{ const k=o.indexOf(id); return k<0?1000+DEFORD.indexOf(id):k; }; SL.sort((a,b)=>pos(a.id)-pos(b.id)); }
 function moveSlide(from,to){ if(to<0||to>=SL.length||from===to) return; const curId=SL[cur].id; const ids=SL.map(x=>x.id); const [m]=ids.splice(from,1); ids.splice(to,0,m); S.order=ids; render(); cur=SL.findIndex(x=>x.id===curId); go(cur,true); save(); toggleOv(true); }
-function render(){ applyOrder(); $('#slides').innerHTML=SL.map((s,i)=>`<section class="sl ${s.cls||''}" data-i="${i}" data-id="${s.id}" aria-label="${esc(s.title)}">${s.html()}</section>`).join('');
+function render(){ syncMods(); applyOrder(); $('#slides').innerHTML=SL.map((s,i)=>`<section class="sl ${s.cls||''}" data-i="${i}" data-id="${s.id}" aria-label="${esc(s.title)}">${s.html()}</section>`).join('');
   applyBinds(); if(!document.body.classList.contains('edit')) splitAll(); slides().forEach((el,i)=>SL[i].init&&SL[i].init(el)); syncPlan();
   renderDots();
   if(document.body.classList.contains('edit')) setEditable(document,true); }
@@ -1433,7 +1449,7 @@ function countUp(n,to,dur,delay,suf=''){ const dec=to%1!==0; const fin=()=>n.tex
   const st=now=>{ const u=Math.min(1,Math.max(0,(now-t0)/dur)); const e=1-Math.pow(1-u,4); const v=to*e; n.textContent=(dec?v.toFixed(1).replace('.',','):fmt(v))+suf; if(u<1) requestAnimationFrame(st); else fin(); };
   requestAnimationFrame(st); }
 function getBind(k){ const [a,b]=k.split(':'); if(a==='mark') return S.cfg.mark||'DC'; if(a==='name') return S.cfg.name||''; if(a==='client') return S.cfg.client||'';
-  if(a==='price') return dash(S.cfg.price[b]); if(a==='plazo') return dash(S.cfg.plazo[b]); if(a==='phase') return dash(S.cfg.phase[+b]); return ''; }
+  if(a==='price') return dash(S.cfg.price[b]); if(a==='plazo') return plazoOf(b); if(a==='phase') return dash(S.cfg.phase[+b]); return ''; }
 function applyBinds(){ $$('[data-bind]').forEach(el=>{ const v=getBind(el.dataset.bind); if(el.dataset.bind==='mark'){ el.innerHTML=`<span class="mlw">${[...v].map((c,i)=>`<span class="ml" style="--li:${i}">${esc(c)}</span>`).join('')}</span>`; } else el.textContent=v; }); syncPlan(); }
 const HOPS=['hop','tilt','jelly','hop'];
 function playMark(el,kind){ if(REDUCE) return; el.classList.remove('hop','tilt','jelly','drop'); void el.offsetWidth; el.classList.add(kind||HOPS[Math.floor(Math.random()*HOPS.length)]); }
@@ -1503,10 +1519,10 @@ $('#cfgTabs').addEventListener('click',e=>{const b=e.target.closest('button'); i
 const fld=(lab,path,ph='---')=>`<label class="fld"><span>${esc(lab)}</span><input type="text" data-p="${path}" value="${esc(getP(path))}" placeholder="${esc(ph)}"></label>`;
 function getP(p){ return p.split('.').reduce((o,k)=>o==null?o:o[k],S.cfg)??''; }
 function setP(p,v){ const ks=p.split('.'); let o=S.cfg; ks.slice(0,-1).forEach(k=>o=o[k]); o[ks[ks.length-1]]=v; }
-function renderCfg(){ const b=$('#cfgBody'); let h_='';
+function renderCfg(){ syncMods(); const b=$('#cfgBody'); let h_='';
   if(tab==='gen') h_=`<div class="grp">Marca</div>${fld('Sigla','mark','DC')}${fld('Nombre','name','DataCocha')}<div class="grp">Cliente</div>${fld('Nombre del cliente','client','Educultura')}
     <div class="grp">Datos</div><p class="hint">Todo se guarda solo y lo ven los demás socios que abren esta presentación.</p><button class="pbtn" id="rstAll">Restablecer toda la presentación</button>`;
-  if(tab==='mod') h_=`<p class="hint">Definan en qué plan entra cada módulo. El plan que ve el cliente sale del módulo más alto que elija.</p>${MODS.map(m=>`<div class="mce"><b>${esc(modN(m))}</b><div class="mcr"><label><span>Plan</span><select data-mt="${m.k}">${[['B',planN('B')],['E',planN('E')],['A',planN('A')],['X','Adicional']].map(([v,n])=>`<option value="${v}" ${tierOf(m)===v?'selected':''}>${esc(n)}</option>`).join('')}</select></label><label><span>Dificultad</span><select data-md="${m.k}">${[1,2,3].map(v=>`<option value="${v}" ${difOf(m)===v?'selected':''}>${DIFN[v]}</option>`).join('')}</select></label><label><span>Tiempo</span><input type="text" data-mw="${m.k}" value="${esc(wkOf(m))}"></label></div>
+  if(tab==='mod') h_=`<p class="hint">Definan en qué plan entra cada módulo. El plan que ve el cliente sale del módulo más alto que elija. Si no escriben un plazo en "Precios y tiempos", se suma el tiempo de los módulos de cada plan.</p><button class="pbtn pr" id="modAdd">Agregar módulo</button>${MODS.map(m=>`<div class="mce"><div class="mch"><b>${esc(modN(m))}</b>${(S.cmods||[]).some(c=>c.k===m.k)?`<select data-mi="${m.k}" aria-label="Ícono">${MICONS.map(n=>`<option value="${n}" ${m.ic===n?'selected':''}>${n}</option>`).join('')}</select><button class="pbtn sm" data-mdel="${m.k}">Quitar</button>`:''}</div><div class="mcr"><label><span>Plan</span><select data-mt="${m.k}">${[['B',planN('B')],['E',planN('E')],['A',planN('A')],['X','Adicional']].map(([v,n])=>`<option value="${v}" ${tierOf(m)===v?'selected':''}>${esc(n)}</option>`).join('')}</select></label><label><span>Dificultad</span><select data-md="${m.k}">${[1,2,3].map(v=>`<option value="${v}" ${difOf(m)===v?'selected':''}>${DIFN[v]}</option>`).join('')}</select></label><label><span>Tiempo</span><input type="text" data-mw="${m.k}" value="${esc(wkOf(m))}"></label></div>
       <details class="mfe"><summary>Nombre, descripción y funciones (${fnOf(m).length})</summary>
        <label class="fld"><span>Nombre</span><input type="text" data-mn="${m.k}" value="${esc(modN(m))}"></label>
        <label class="fld"><span>Descripción</span><textarea data-mdd="${m.k}" rows="2">${esc(T('m.'+m.k+'.d',m.d))}</textarea></label>
@@ -1545,13 +1561,14 @@ $('#cfgBody').addEventListener('input',e=>{ const x=e.target;
   if(x.dataset.mn){ S.texts['m.'+x.dataset.mn+'.n']=x.value; applyBinds(); save(); }
   if(x.dataset.mdd){ S.texts['m.'+x.dataset.mdd+'.d']=x.value; save(); }
   if(x.dataset.fn||x.dataset.fd){ const k=x.dataset.fn||x.dataset.fd, arr=fnBake(k); arr[+x.dataset.j][x.dataset.fn?0:1]=x.value; save(); }
-  if(x.dataset.mw){ const k=x.dataset.mw; S.mcfg[k]={...(S.mcfg[k]||{}),wk:x.value}; $$(`[data-wk="${k}"]`).forEach(n=>n.textContent=x.value); save(); }
+  if(x.dataset.mw){ const k=x.dataset.mw; S.mcfg[k]={...(S.mcfg[k]||{}),wk:x.value}; $$(`[data-wk="${k}"]`).forEach(n=>n.textContent=x.value); applyBinds(); save(); }
   if(x.dataset.p){ setP(x.dataset.p,x.value); applyBinds(); if(x.dataset.p.startsWith('phase')||x.dataset.p.startsWith('price')||x.dataset.p.startsWith('plazo')) syncPlan(); save(); }
   if(x.dataset.c){ S.colors[+x.dataset.c]=x.value; const tx=$(`[data-ch="${x.dataset.c}"]`); if(tx) tx.value=x.value; applyColors(); save(); }
   if(x.dataset.ch&&/^#[0-9a-f]{6}$/i.test(x.value)){ S.colors[+x.dataset.ch]=x.value; const cc=$(`[data-c="${x.dataset.ch}"]`); if(cc) cc.value=x.value; applyColors(); save(); } });
 $('#cfgBody').addEventListener('change',e=>{ const x=e.target; if(x.id==='swEdit') setEdit(x.checked);
   if(x.dataset.qk){ const q=qById(x.dataset.qk); q.k=x.value; if(q.k==='num'&&!q.rg) q.rg=[]; refreshDyn(); renderCfg(); save(); }
   if(x.dataset.cs){ S.calc.show[x.dataset.cs]=x.checked; save(); }
+  if(x.dataset.mi){ const c=(S.cmods||[]).find(c=>c.k===x.dataset.mi); if(c){ c.ic=x.value; const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); save(); } }
   if(x.dataset.mt||x.dataset.md){ const k=x.dataset.mt||x.dataset.md; S.mcfg[k]={...(S.mcfg[k]||{}),[x.dataset.mt?'t':'dif']:x.dataset.mt?x.value:+x.value}; const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); save(); }
   if(x.dataset.qg){ if(S.qs.filter(q=>q.g===x.value).length>=QMAX){ toast('Ese grupo ya tiene 5 preguntas'); x.value=qById(x.dataset.qg).g; return; } qById(x.dataset.qg).g=x.value; refreshDyn(); save(); }
   if(x.dataset.sl){ const id=x.dataset.sl; S.hidden=S.hidden.filter(h_=>h_!==id); if(!x.checked) S.hidden.push(id); if(SL.every((s,i)=>isHid(i))){ S.hidden=S.hidden.filter(h_=>h_!==id); x.checked=true; } renderDots(); if(isHid(cur)){ const n=nextI(1); go(n!==cur?n:nextI(-1)); } save(); }
@@ -1568,7 +1585,9 @@ $('#cfgBody').addEventListener('click',e=>{ const id=e.target.id;
   if(id==='pdfNow'){ makePdf(); return; }
   const fa=e.target.closest('[data-fa]'); if(fa){ fnBake(fa.dataset.fa).push(['Nueva función','']); renderCfg(); $$(`details.mfe`).forEach(d_=>{ if(d_.querySelector(`[data-fa="${fa.dataset.fa}"]`)) d_.open=true; }); save(); return; }
   const fxb=e.target.closest('[data-fx]'); if(fxb){ const k=fxb.dataset.fx; fnBake(k).splice(+fxb.dataset.j,1); renderCfg(); $$(`details.mfe`).forEach(d_=>{ if(d_.querySelector(`[data-fa="${k}"]`)) d_.open=true; }); save(); return; }
-  if(id==='rstMod'){ S.mcfg={}; Object.keys(S.texts).forEach(key=>{ if(/^m\.[a-z0-9]+\.(n|d|f\d+|fd\d+)$/.test(key)) delete S.texts[key]; }); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); save(); return; }
+  if(id==='modAdd'){ const k='c'+Date.now().toString(36); S.cmods=(S.cmods||[]).concat([{k,ic:'grid',n:'Nuevo módulo',t:'B',dif:1,wk:'1 semana',d:'Qué resuelve este módulo.',f:['Nueva función'],fd:['']}]); S.mods[k]=false; const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); const dd=[...$$('details.mfe')].pop(); if(dd){ dd.open=true; dd.scrollIntoView({block:'center'}); } save(); return; }
+  const mdel=e.target.closest('[data-mdel]'); if(mdel){ const k=mdel.dataset.mdel; S.cmods=(S.cmods||[]).filter(c=>c.k!==k); delete S.mods[k]; delete S.mcfg[k]; S.prio=(S.prio||[]).filter(x=>x!==k); Object.keys(S.texts).forEach(key=>{ if(key.startsWith('m.'+k+'.')) delete S.texts[key]; }); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); save(); return; }
+  if(id==='rstMod'){ MODS0.forEach(m=>delete S.mcfg[m.k]); Object.keys(S.texts).forEach(key=>{ const mm=/^m\.([a-z0-9]+)\.(n|d|f\d+|fd\d+)$/.exec(key); if(mm&&MODS0.some(m=>m.k===mm[1])) delete S.texts[key]; }); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); save(); return; }
   const pb=e.target.closest('[data-pre]'); if(pb){ const pr=PRESETS[+pb.dataset.pre]; S.colors=[...pr[1]]; S.page=pr[2]; applyColors(); renderCfg(); save(); return; }
   if(id==='rstCol'){ S.colors=[...PAL0]; S.page=PAGE0; applyColors(); renderCfg(); save(); }
   if(id==='rstTxt'){ S.texts={}; const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); save(); toast('Textos restaurados'); }
@@ -1583,7 +1602,7 @@ function save(){ clearTimeout(saveT); st('Guardando…'); saveT=setTimeout(async
   try{ localStorage.setItem('dc-edu',state); }catch(e){}
   if(db){ try{ await db.doc(DOC).set({state,updatedAt:Date.now()}); st('Guardado'); }catch(e){ st('Guardado en este navegador'); } } else st('Guardado en este navegador'); saveT=null; },700); }
 function load(d){ if(!d) return; const b=DEF(); S={...b,...d,page:d.page||PAGE0,cfg:{...b.cfg,...(d.cfg||{}),price:{...b.cfg.price,...((d.cfg||{}).price||{})},plazo:{...b.cfg.plazo,...((d.cfg||{}).plazo||{})},phase:((d.cfg||{}).phase||b.cfg.phase)},mods:d.v?{...b.mods,...(d.mods||{})}:b.mods,v:2,texts:d.texts||{},reqs:d.reqs||[],notes:d.notes||{},colors:(d.colors&&d.colors.length===5)?d.colors:b.colors};
-  S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; S.na=d.na||{}; S.ansR=d.ansR||{}; S.calc={pct:100,...(d.calc||{}),show:{horas:true,sin:true,resp:true,...((d.calc||{}).show||{})}}; if((d.qv||0)<4){ S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.autoAnim=!!d.autoAnim; S.sim=d.sim||{}; S.sysPal=d.sysPal??0; S.sysCus=d.sysCus||null; if(Array.isArray(S.order)&&!S.order.includes('ahorro')){ const i=S.order.indexOf('competencia'); if(i>=0) S.order.splice(i,0,'ahorro'); else { const m_=S.order.indexOf('mercado'); S.order.splice(m_>=0?m_+1:S.order.length,0,'ahorro'); } } if(Array.isArray(S.order)){ S.order=S.order.filter(x=>!DROP.includes(x)); if(!S.order.includes('estetica')){ const j=S.order.indexOf('medida'); S.order.splice(j>=0?j+1:S.order.length,0,'estetica'); } } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
+  S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; S.na=d.na||{}; S.ansR=d.ansR||{}; S.calc={pct:100,...(d.calc||{}),show:{horas:true,sin:true,resp:true,...((d.calc||{}).show||{})}}; if((d.qv||0)<4){ S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.autoAnim=!!d.autoAnim; S.cmods=Array.isArray(d.cmods)?d.cmods:[]; S.sim=d.sim||{}; S.sysPal=d.sysPal??0; S.sysCus=d.sysCus||null; if(Array.isArray(S.order)&&!S.order.includes('ahorro')){ const i=S.order.indexOf('competencia'); if(i>=0) S.order.splice(i,0,'ahorro'); else { const m_=S.order.indexOf('mercado'); S.order.splice(m_>=0?m_+1:S.order.length,0,'ahorro'); } } if(Array.isArray(S.order)){ S.order=S.order.filter(x=>!DROP.includes(x)); if(!S.order.includes('estetica')){ const j=S.order.indexOf('medida'); S.order.splice(j>=0?j+1:S.order.length,0,'estetica'); } } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
 
 /* PDF */
 const MDP={cons:'Registro centralizado de todas las consultas recibidas, con su canal de origen y fecha, evitando registros duplicados.',seg:'Control del historial de cada interesado y de los próximos contactos programados, para que ninguna consulta quede sin respuesta.',pos:'Gestión de los postulantes por programa, con sus requisitos, convocatorias y estado de avance.',doc:'Archivo digital de la documentación de cada postulante, con alertas de vencimiento y registro de citas consulares.',pag:'Registro de planes de pago, cuotas, saldos y emisión de recibos.',rep:'Indicadores de gestión actualizados sobre consultas, conversión y desempeño por canal y asesor.',wa:'Automatización de mensajes por la vía oficial de WhatsApp Business: primera respuesta, seguimientos programados y avisos al asesor.',r66:'Gestión de los programas de idiomas en el exterior, con control de cupos, límites de edad y seguimiento hasta el viaje.'};
