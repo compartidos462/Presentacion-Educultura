@@ -14,3 +14,10 @@ Cada cambio que se sube a `main` se publica solo.
 
 ## Datos compartidos
 Lo que se edita en la presentación (respuestas, módulos, precios, textos) se guarda en Supabase, proyecto "fractal", tabla `presentaciones`, fila `dc-educultura`. Todos los que abren el link ven lo mismo; para ver cambios de otro socio basta con volver a la pestaña o recargar.
+
+## Sin internet
+La primera vez que se abre la página con internet, el navegador guarda una copia (presentación, fuentes y generador de PDF). Desde ahí funciona sin conexión en ese mismo equipo y navegador.
+Lo que se edite sin internet se guarda en el equipo y se sube solo a la base compartida cuando vuelve la conexión.
+
+## Actualizar desde el archivo fuente
+`./build.sh ruta/al/index-fuente.html` arma `index.html` con las fuentes y jsPDF locales (`vendor/`) y actualiza la versión de `sw.js`.

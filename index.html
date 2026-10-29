@@ -7,10 +7,8 @@
 <body>
 <title>DC DataCocha · Educultura</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="vendor/fonts.css">
+<script src="vendor/jspdf.umd.min.js"></script>
 <style>
 /* Paleta de la presentación: editable desde Configuración. Tema claro fijo a propósito (es una presentación). */
 :root{
@@ -1615,7 +1613,10 @@ let db=null, saveT=null; const DOC='presentaciones/dc-educultura';
 const st=m=>{ $('#saveSt').textContent=m; };
 function save(){ clearTimeout(saveT); st('Guardando…'); saveT=setTimeout(async()=>{ const state=JSON.stringify(S);
   try{ localStorage.setItem('dc-edu',state); }catch(e){}
-  if(db){ try{ await db.doc(DOC).set({state,updatedAt:Date.now()}); st('Guardado'); }catch(e){ st('Guardado en este navegador'); } } else st('Guardado en este navegador'); saveT=null; },700); }
+  if(db){ try{ await db.doc(DOC).set({state,updatedAt:Date.now()}); st('Guardado'); pend(false); }catch(e){ pend(true); st(navigator.onLine===false?'Sin conexión: guardado en este equipo':'Guardado en este navegador'); } } else st('Guardado en este navegador'); saveT=null; },700); }
+function pend(v){ try{ if(v) localStorage.setItem('dc-edu-pend','1'); else localStorage.removeItem('dc-edu-pend'); }catch(e){} }
+const isPend=()=>{ try{ return localStorage.getItem('dc-edu-pend')==='1'; }catch(e){ return false; } };
+addEventListener('online',()=>{ if(isPend()) save(); });
 function load(d){ if(!d) return; const b=DEF(); S={...b,...d,page:d.page||PAGE0,cfg:{...b.cfg,...(d.cfg||{}),price:{...b.cfg.price,...((d.cfg||{}).price||{})},plazo:{...b.cfg.plazo,...((d.cfg||{}).plazo||{})},phase:((d.cfg||{}).phase||b.cfg.phase)},mods:d.v?{...b.mods,...(d.mods||{})}:b.mods,v:2,texts:d.texts||{},reqs:d.reqs||[],notes:d.notes||{},colors:(d.colors&&d.colors.length===5)?d.colors:b.colors};
   S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; S.na=d.na||{}; S.ansR=d.ansR||{}; S.calc={pct:100,...(d.calc||{}),show:{horas:true,sin:true,resp:true,...((d.calc||{}).show||{})}}; if((d.qv||0)<4){ S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.autoAnim=!!d.autoAnim; S.cmods=Array.isArray(d.cmods)?d.cmods:[]; S.sim=d.sim||{}; S.sysPal=d.sysPal??0; if(!d.palv&&typeof d.sysPal==='number'&&d.sysPal>0) S.sysPal=d.sysPal+1; S.palv=2; S.sysCus=d.sysCus||null; if(Array.isArray(S.order)&&!S.order.includes('ahorro')){ const i=S.order.indexOf('competencia'); if(i>=0) S.order.splice(i,0,'ahorro'); else { const m_=S.order.indexOf('mercado'); S.order.splice(m_>=0?m_+1:S.order.length,0,'ahorro'); } } if(Array.isArray(S.order)){ S.order=S.order.filter(x=>!DROP.includes(x)); if(!S.order.includes('estetica')){ const j=S.order.indexOf('medida'); S.order.splice(j>=0?j+1:S.order.length,0,'estetica'); } } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
 
@@ -1704,11 +1705,12 @@ function sbDb(){ const H={apikey:SB.key,'Content-Type':'application/json'};
   return {doc:()=>({
     async get(){ const r=await fetch(`${SB.url}/rest/v1/presentaciones?id=eq.${SB.id}&select=state`,{headers:H,cache:'no-store'}); if(!r.ok) throw new Error('get'); const j=await r.json(); return {exists:j.length>0,data:()=>j.length?{state:JSON.stringify(j[0].state)}:null}; },
     async set(o){ const r=await fetch(`${SB.url}/rest/v1/presentaciones?on_conflict=id`,{method:'POST',headers:{...H,Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({id:SB.id,state:JSON.parse(o.state),updated_at:new Date().toISOString()})}); if(!r.ok) throw new Error('set'); } })}; }
-async function pullShared(){ if(!db||saveT) return; try{ const s_=await db.doc(DOC).get(); if(s_.exists){ const d=s_.data(); if(d&&d.state&&d.state!==JSON.stringify(S)){ load(JSON.parse(d.state)); applyColors(); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); } } }catch(e){} }
+async function pullShared(){ if(!db||saveT) return; if(isPend()){ save(); return; } try{ const s_=await db.doc(DOC).get(); if(s_.exists){ const d=s_.data(); if(d&&d.state&&d.state!==JSON.stringify(S)){ load(JSON.parse(d.state)); applyColors(); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); } } }catch(e){} }
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden&&!window.claude) pullShared(); });
 (async()=>{ try{ db=window.claude?await window.claude.use('db'):sbDb(); }catch(e){ db=null; }
-  if(db){ try{ const s_=await db.doc(DOC).get(); if(s_.exists){ const d=s_.data(); if(d&&d.state){ load(JSON.parse(d.state)); applyColors(); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); } } st('Guardado'); }catch(e){} } })();
+  if(db&&isPend()){ save(); } else if(db){ try{ const s_=await db.doc(DOC).get(); if(s_.exists){ const d=s_.data(); if(d&&d.state){ load(JSON.parse(d.state)); applyColors(); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); } } st('Guardado'); }catch(e){} } })();
 </script>
 
+<script>if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')) addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
 </body>
 </html>
