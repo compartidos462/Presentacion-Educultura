@@ -730,9 +730,110 @@ body.cfgon .tools{right:calc(min(400px,100vw) + 14px)}
 .cside b{font-size:22px;font-weight:800;color:var(--c5)}
 .cside span{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:18px;padding:13px 16px;font-size:16px;font-weight:600;color:var(--c5)}
 .cside .ic{color:var(--c4);font-size:20px}
+
+/* ---------- simulador de ahorro ---------- */
+.svw{display:grid;grid-template-columns:440px 1fr;gap:34px;margin-top:34px}
+.svin{background:#fff;border-radius:30px;padding:28px 30px;box-shadow:0 14px 40px rgba(31,47,152,.08);display:grid;gap:18px;align-content:start}
+.svf{display:grid;gap:8px}.svf>span{font-size:17px;font-weight:700;color:var(--c5)}
+.stp{display:flex;align-items:center;gap:8px}
+.stp button{width:46px;height:46px;border:0;border-radius:14px;background:var(--soft);color:var(--c5);font-size:24px;font-weight:700}
+.stp button:hover{background:var(--c1)}
+.stp input{flex:1;min-width:0;width:0;text-align:center;border:2px solid var(--line);border-radius:14px;padding:9px;font-size:24px;font-weight:800;color:var(--c5)}
+.stp input:focus{border-color:var(--c4);outline:none}
+.svfx{border-top:1px solid var(--line);padding-top:14px}.svfx b{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+#svFix{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}#svFix i{font-style:normal;font-size:13.5px;font-weight:600;color:var(--c5);background:var(--soft);border-radius:99px;padding:5px 11px}
+.svtb{background:#fff;border-radius:30px;padding:26px 30px;box-shadow:0 14px 40px rgba(31,47,152,.08);display:flex;flex-direction:column}
+.svr{display:grid;grid-template-columns:1fr 190px 190px;align-items:center;padding:16px 4px;border-top:1px solid var(--line);font-size:19px}
+.svr span{color:var(--txt);font-weight:600}.svr b{font-weight:800;color:var(--c5);text-align:right;font-variant-numeric:tabular-nums}
+.svr .dc{color:var(--c4)}
+.svh{border-top:0;padding-top:0}.svh span{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-align:right}.svh span:first-child{text-align:left}.svh .dc{color:var(--c4)}
+.svt{background:var(--soft);border-radius:18px;border-top:0;margin-top:8px;padding:18px 14px}.svt span{font-weight:800;color:var(--c5)}.svt .dc{font-size:26px}.svt .dc.ok{color:#2f8f5b}
+.svgo{margin-top:auto;align-self:flex-end;border:0;color:#fff;border-radius:99px;padding:15px 30px;font-size:19px;font-weight:800;display:flex;align-items:center;gap:10px;box-shadow:0 12px 30px rgba(28,167,236,.3);transition:transform .25s var(--ease)}
+.svgo:hover{transform:translateY(-2px)}
+.svm{position:absolute;inset:0;z-index:30;background:rgba(232,237,248,.75);backdrop-filter:blur(6px);display:grid;place-items:center}.svm[hidden]{display:none}
+.svc{width:1080px;background:#fff;border-radius:34px;padding:34px 42px;box-shadow:0 30px 80px rgba(31,47,152,.22);animation:aPop .5s cubic-bezier(.34,1.56,.64,1) both}
+.svch{display:flex;align-items:center;justify-content:space-between}.svch h3{margin:0;font-size:32px;font-weight:800;color:var(--c5);letter-spacing:-.02em}
+.svch .mx{border:0;background:var(--soft);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--c5);font-size:20px}
+.svres{display:grid;grid-template-columns:1fr 400px;gap:34px;margin-top:22px;align-items:center}
+.svk{display:grid;gap:16px}
+.st{opacity:0;animation:aRise .7s var(--ease) var(--d) forwards}
+.kb1{background:var(--soft);border-radius:24px;padding:22px 26px}.kb1 small,.kb2 small{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.kb1 b{display:block;font-size:64px;font-weight:800;letter-spacing:-.03em;color:#2f8f5b;line-height:1.05;margin-top:6px;font-variant-numeric:tabular-nums}
+.kb1 span{font-size:16px;color:var(--mut);font-weight:600}
+.kb2{border:1.5px solid var(--line);border-radius:24px;padding:20px 26px;display:grid;gap:10px}
+.kr{display:grid;grid-template-columns:130px 70px 30px 70px;align-items:center;font-size:22px}.kr em{font-style:normal;font-size:17px;font-weight:700;color:var(--txt)}.kr b{font-weight:800;color:var(--mut)}.kr i{font-style:normal;color:var(--mut)}
+.kr .to{color:var(--c5);transition:color .6s}.kr .to.kg{color:#2f8f5b}
+.svpie{display:grid;justify-items:center;gap:14px}
+.pie{width:330px;height:330px;border-radius:50%;display:grid;place-items:center;box-shadow:0 18px 40px rgba(31,47,152,.12)}
+.phole{width:150px;height:150px;border-radius:50%;background:#fff;display:grid;place-items:center;align-content:center;text-align:center}
+.phole b{font-size:24px;font-weight:800;color:var(--c5)}.phole small{font-size:14px;font-weight:800;color:#b45a5a;letter-spacing:.06em;text-transform:uppercase;transition:color .6s}.phole small.ok{color:#2f8f5b}
+.plg{display:flex;gap:18px;font-size:15px;font-weight:700;color:var(--txt)}.plg span{display:flex;align-items:center;gap:7px}.plg i{width:14px;height:14px;border-radius:4px}
+.svf2{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+.sb2{border:0;border-radius:99px;padding:13px 22px;font-size:16px;font-weight:800;background:var(--soft);color:var(--c5);display:flex;align-items:center;gap:8px}
+.sb2.pr{background:linear-gradient(135deg,var(--c4),var(--c2));color:#fff}
+.mjl{display:grid;gap:14px;margin-top:22px}
+.mj{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:start;background:var(--soft);border-radius:22px;padding:18px 22px;opacity:0;animation:aRise .6s var(--ease) var(--d) forwards}
+.mj .ci{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;color:#fff;font-size:26px}
+.mj b{display:block;font-size:21px;font-weight:800;color:var(--c5)}.mj span{display:block;font-size:17px;color:var(--mut);margin-top:4px;line-height:1.4}
+.mjs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.mjs i{font-style:normal;background:#fff;border-radius:99px;padding:8px 14px;font-size:15.5px;font-weight:700;color:var(--c5);opacity:0;animation:aPop .5s cubic-bezier(.34,1.56,.64,1) var(--d) forwards}
+.mjs i span{display:inline;margin:0;font-size:inherit;color:inherit}
+/* ---------- estética ---------- */
+.sew{display:grid;grid-template-columns:400px 1fr;gap:36px;margin-top:30px}
+.sep{display:grid;gap:14px;align-content:start}
+.sepg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sepg button{border:2px solid transparent;background:#fff;border-radius:22px;padding:14px;display:grid;gap:10px;text-align:left;box-shadow:0 10px 26px rgba(31,47,152,.07);transition:transform .3s var(--ease),border-color .3s}
+.sepg button:hover{transform:translateY(-3px)}.sepg button.on{border-color:var(--c4);box-shadow:0 0 0 4px rgba(28,167,236,.15),0 14px 30px rgba(31,47,152,.12)}
+.sepg .sw2{display:flex;height:46px;border-radius:14px;overflow:hidden}.sepg .sw2 i{flex:2}.sepg .sw2 i+i{flex:1}
+.sepg b{font-size:17px;font-weight:800;color:var(--c5)}
+.secu{background:#fff;border-radius:22px;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;border:2px dashed var(--line)}.secu.on{border:2px solid var(--c4)}
+.secu b{grid-column:1/-1;font-size:16px;font-weight:800;color:var(--c5)}
+.secu label{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--mut);cursor:pointer}
+.secu input{width:44px;height:44px;border:0;padding:0;background:none;border-radius:12px;cursor:pointer}
+.sem{--sp:#1F4E9C;--sa:#2FB3E0;position:relative;overflow:hidden;height:610px;border-radius:30px;display:grid;grid-template-columns:230px 1fr;background:color-mix(in srgb,var(--sp) 5%,#fff);box-shadow:0 26px 70px rgba(31,47,152,.18);transition:background .6s}
+.sem *{transition:background-color .6s,color .6s,border-color .6s}
+.sem aside{background:color-mix(in srgb,var(--sp) 82%,#000);padding:24px 16px;display:grid;gap:6px;align-content:start}
+.sem .sl1{display:flex;align-items:center;gap:10px;margin-bottom:18px;color:#fff;font-weight:800;font-size:17px}
+.sem .sl1 b{width:38px;height:38px;border-radius:12px;background:var(--sa);display:grid;place-items:center;color:#fff}
+.sem aside i{font-style:normal;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.72);font-size:15px;font-weight:700;padding:11px 12px;border-radius:12px}
+.sem aside i.on{background:rgba(255,255,255,.14);color:#fff}
+.sem main{padding:24px 26px;display:grid;gap:16px;align-content:start}
+.sem header{display:flex;align-items:center;justify-content:space-between}.sem header b{font-size:24px;font-weight:800;color:color-mix(in srgb,var(--sp) 85%,#000)}
+.sbtn{display:flex;align-items:center;gap:6px;background:var(--sp);color:#fff;border-radius:99px;padding:10px 16px;font-size:14px;font-weight:800}
+.skp{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.skp div{background:#fff;border-radius:18px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.05)}
+.skp b{display:block;font-size:34px;font-weight:800;color:var(--sp)}.skp span{font-size:14px;font-weight:700;color:#6b7280}
+.skp .hi{background:var(--sp)}.skp .hi b,.skp .hi span{color:#fff}
+.sgr{display:grid;grid-template-columns:1fr 1.25fr;gap:12px}
+.sch{background:#fff;border-radius:18px;padding:18px;display:flex;align-items:flex-end;gap:10px;height:250px;box-shadow:0 6px 18px rgba(0,0,0,.05)}
+.sch i{flex:1;border-radius:8px 8px 4px 4px;background:color-mix(in srgb,var(--sa) 45%,#fff)}.sch i.hi{background:var(--sa)}
+.sls{background:#fff;border-radius:18px;padding:10px 14px;display:grid;box-shadow:0 6px 18px rgba(0,0,0,.05)}
+.sls>div{display:grid;grid-template-columns:34px 1fr auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #eef0f4}.sls>div:last-child{border:0}
+.av2{grid-row:1/3;width:34px;height:34px;border-radius:50%;background:color-mix(in srgb,var(--sp) 14%,#fff);color:var(--sp);display:grid;place-items:center;font-weight:800;font-size:14px}
+.sls b{font-size:14.5px;color:#1f2937}.sls em{grid-column:2;font-style:normal;font-size:12.5px;color:#6b7280}
+.sls i{grid-row:1/3;grid-column:3;font-style:normal;font-size:12px;font-weight:800;padding:4px 10px;border-radius:99px}
+.sls .st0{background:color-mix(in srgb,var(--sa) 18%,#fff);color:color-mix(in srgb,var(--sa) 70%,#000)}.sls .st1{background:#fff3d6;color:#9a6408}.sls .st2{background:color-mix(in srgb,var(--sp) 14%,#fff);color:var(--sp)}
+.srp{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-20px;border-radius:50%;pointer-events:none;opacity:0}
+.srp.go{animation:sRip .75s cubic-bezier(.4,0,.2,1)}
+@keyframes sRip{0%{transform:scale(0);opacity:.35}100%{transform:scale(45);opacity:0}}
+/* config funciones */
+.mfe{margin-top:10px}.mfe summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--c4)}
+.fne{border-top:1px dashed var(--line);padding-top:8px;margin-top:8px;display:grid;gap:6px}
+.fnr{display:grid;grid-template-columns:18px 1fr 34px;gap:6px;align-items:center}.fnr b{font-size:12px;color:var(--mut)}
+.fne input,.fne textarea{border:1.5px solid var(--line);border-radius:10px;padding:7px 9px;font-size:13.5px;width:100%;min-width:0;background:#fff;resize:vertical}
+.fnr .pbtn{padding:0;width:34px;height:34px;display:grid;place-items:center}
+
+/* control de animación */
+.anc{position:absolute;right:18px;top:50%;transform:translateY(-50%);z-index:20;display:grid;gap:6px;opacity:.28;transition:opacity .3s}
+.anc[hidden]{display:none}
+.anc:hover,.anc.wait{opacity:.75}
+.anc button{width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.85);box-shadow:0 4px 14px rgba(31,47,152,.12);display:grid;place-items:center;color:var(--c5)}
+.anc button:hover{background:#fff;color:var(--c4)}
+.anc svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.anc.wait #anDn{animation:ancP 1.8s ease-in-out infinite}
+@keyframes ancP{0%,100%{box-shadow:0 4px 14px rgba(31,47,152,.12)}50%{box-shadow:0 0 0 6px rgba(28,167,236,.18),0 4px 14px rgba(31,47,152,.12)}}
+body.edit .anc{display:none}
 </style>
 
-<div id="view"><div id="stage"><div class="bg" id="bg"></div><div id="slides"></div></div></div>
+<div id="view"><div id="stage"><div class="bg" id="bg"></div><div id="slides"></div><div class="anc" id="anc" hidden><button id="anUp" title="Reiniciar animación (flecha arriba)" aria-label="Reiniciar animación"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button id="anDn" title="Animar (flecha abajo)" aria-label="Animar"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></div></div></div>
 
 <div class="tools" id="tools">
   <button id="tGrid" title="Vista de diapositivas" aria-label="Vista de diapositivas"></button>
@@ -811,6 +912,9 @@ const MODS=[
  {k:'r66',ic:'book',n:'Idiomas en el exterior',t:'X',dif:1,wk:'1 semana',d:'Programas de inglés en Inglaterra (Route 66) con su propio seguimiento.',f:['Convocatorias y cupos','Límite de edad por programa','Seguimiento hasta el viaje'],fd:['Fechas y cupos de los cursos en Inglaterra.','El sistema avisa si un interesado se pasa de la edad del programa.','Del interés al viaje, con sus documentos y pagos.']},
 ];
 const DIFN=['','Baja','Media','Alta'];
+const fnRaw=m=>{ const o=S.mcfg&&S.mcfg[m.k]&&S.mcfg[m.k].f; return Array.isArray(o)?o.map(x=>[x[0]||'',x[1]||'']):m.f.map((f,j)=>[f,(m.fd||[])[j]||'']); };
+const fnOf=m=>fnRaw(m).map((x,j)=>[T('m.'+m.k+'.f'+j,x[0]),T('m.'+m.k+'.fd'+j,x[1])]);
+function fnBake(k){ const m=MODS.find(x=>x.k===k), arr=fnOf(m); Object.keys(S.texts).forEach(key=>{ if(key.startsWith('m.'+k+'.f')) delete S.texts[key]; }); S.mcfg[k]={...(S.mcfg[k]||{}),f:arr}; return S.mcfg[k].f; }
 const mc=m=>(S.mcfg&&S.mcfg[m.k])||{};
 const tierOf=m=>mc(m).t||m.t, difOf=m=>+(mc(m).dif||m.dif), wkOf=m=>mc(m).wk!=null?mc(m).wk:m.wk;
 const tierN=x=>x==='X'?T('s6.add','Módulo adicional'):planN(x);
@@ -838,6 +942,7 @@ const Q0=[
  {id:'q21',g:'dec',t:'¿Tienen un rango de inversión pensado para esta primera etapa?',k:'text'},
 ];
 const QMAX=5;
+const DROP=['competencia','respuesta'];
 const RG0={consultas:[['Menos de 100',50],['100 a 300',200],['300 a 1.000',650],['Más de 1.000',1300]],minhist:[['Menos de 1',.5],['1 a 3',2],['3 a 6',4.5],['Más de 6',8]],resp:[['Menos de 1',.5],['1 a 4',2.5],['4 a 12',8],['Más de 24',30]],sinseg:[['Menos de 10',5],['10 a 30',20],['30 a 50',40],['Más de 50',60]],margen:[['Menos de 500',300],['500 a 1.500',1000],['1.500 a 3.000',2250],['Más de 3.000',4000]],conv:[['Menos de 3',2],['3 a 7',5],['7 a 15',11],['Más de 15',20]],horasrep:[['Menos de 10',5],['10 a 30',20],['30 a 60',45],['Más de 60',80]],costoh:[['Menos de 15',10],['15 a 30',22],['30 a 50',40],['Más de 50',60]]};
 Q0.forEach(q=>{ if(q.v&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); });
 const qNA=id=>!!(S.na&&S.na[id]);
@@ -852,7 +957,7 @@ const PDF_INTRO=()=>`El presente documento detalla la propuesta de ${S.cfg.name|
 const PDF_CLOSE='Quedamos a disposición para resolver cualquier consulta sobre esta propuesta y coordinar la fecha de inicio del proyecto.';
 const PAGE0='#e8edf8';
 const PRESETS=[['Océano (actual)',PAL0,PAGE0],['Mandarina y marino',['#FF9B54','#FF6A00','#2C6E9A','#2C6E9A','#0A2342'],'#E9EEF5'],['Arrecife y coral',['#6FE3DF','#FF5D77','#6FE3DF','#0A4A6A','#111827'],'#EAFCFF'],['Cielo dorado',['#8ECAE6','#FFB703','#8ECAE6','#219EBC','#2B2D42'],'#FBF8CC'],['Vidrio costero',['#7FE3D6','#1D8EA6','#7FE3D6','#1D8EA6','#0B3A53'],'#F5F7FA'],['Lavanda y menta',['#C9B3FF','#A6F2CF','#A6F2CF','#C9B3FF','#6B6F8A'],'#F5EAFF']];
-const DEF=()=>({page:PAGE0,texts:{},colors:[...PAL0],cfg:{mark:'DC',name:'DataCocha',client:'Educultura',price:{B:'',E:'',A:'',X:''},plazo:{B:'',E:'',A:''},phase:['','','','','']},v:2,mods:Object.fromEntries(MODS.map(m=>[m.k,false])),reqs:[],notes:{},hidden:['hora','vimos','postulante','recibe'],qs:Q0.map(q=>({...q})),ans:{},avisos:AV0.map(t=>({t,on:false})),progs:PR0.map(t=>({t,on:false})),prio:[],resp:{},mcfg:{},bubble:true,na:{},ansR:{},calc:{pct:100,show:{horas:true,sin:true,resp:true}},qv:4,cliColor:3,spot:true,pdf:{title:'',intro:'',closing:'',validity:'',contact:'',sec:{...PDFSEC0}}});
+const DEF=()=>({page:PAGE0,texts:{},colors:[...PAL0],cfg:{mark:'DC',name:'DataCocha',client:'Educultura',price:{B:'',E:'',A:'',X:''},plazo:{B:'',E:'',A:''},phase:['','','','','']},v:2,mods:Object.fromEntries(MODS.map(m=>[m.k,false])),reqs:[],notes:{},hidden:['hora','vimos','postulante','recibe'],qs:Q0.map(q=>({...q})),ans:{},avisos:AV0.map(t=>({t,on:false})),progs:PR0.map(t=>({t,on:false})),prio:[],resp:{},mcfg:{},bubble:true,autoAnim:false,na:{},ansR:{},sim:{},sysPal:0,sysCus:null,calc:{pct:100,show:{horas:true,sin:true,resp:true}},qv:4,cliColor:3,spot:true,pdf:{title:'',intro:'',closing:'',validity:'',contact:'',sec:{...PDFSEC0}}});
 let S=DEF();
 const T=(k,d)=>(S.texts[k]!=null&&S.texts[k]!=='')?S.texts[k]:d;
 const t=(k,d,tag='span',cls='')=>`<${tag} class="${cls}" data-k="${k}">${esc(T(k,d))}</${tag}>`;
@@ -955,62 +1060,76 @@ SL.push({id:'mercado',title:'El postulante elige',blobs:[[-320,-300,.7,.6],[1300
   return `${h('mk.h','El postulante le escribe a varias agencias')}${t('mk.p','Y casi siempre se queda con la primera que le responde bien.','p','lead')}
   <div class="pick"><svg>${ys.map((y,i)=>`<path class="pl0" data-pl="${i}" d="M${sx+70} ${sy} C${sx+230} ${sy} ${ax-170} ${y+36} ${ax} ${y+36}"/>`).join('')}</svg>
    <div class="stu" data-a="pop" style="left:${sx-70}px;top:${sy-70}px;--dl:.3s"><span>🧑‍🎓</span></div>
-   ${t('mk.q','¿Dónde me inscribo?','div','stq')}
+   <div data-a="fade" style="--dl:.4s">${t('mk.q','¿Dónde me inscribo?','div','stq')}</div>
    ${PK.map((a,i)=>`<div class="ag" data-ag="${i}" style="left:${ax}px;top:${ys[i]}px"><div data-a="drift" style="--dl:${.5+i*.12}s"><b>${t('mk.a'+i,a[0])}</b><span class="tm ${a[2]}">${t('mk.t'+i,a[1])}</span>${a[2]==='win'?`<em class="ck g2">${ic('check')}</em>`:''}</div></div>`).join('')}</div>
   <div class="pst">
-   <div class="g3" data-a="rise" style="--dl:.6s"><b class="n" data-count="21" data-suf="×">0</b>${t('mk.s1','más probabilidad de concretar con un interesado si se le responde en 5 minutos y no en 30.','p')}</div>
-   <div class="g2" data-a="rise" style="--dl:.8s"><b class="n" data-count="10" data-suf="×">0</b>${t('mk.s2','cae la probabilidad de siquiera hablar con él si se espera más de una hora.','p')}</div>
+   <div class="g3" data-a="rise" style="--dl:.6s"><b class="n" data-count="95" data-suf="%">0</b>${t('mk.p1','menos probabilidad de concretar con un interesado si se le responde a los 30 minutos y no a los 5.','p')}</div>
+   <div class="g2" data-a="rise" style="--dl:.8s"><b class="n" data-count="90" data-suf="%">0</b>${t('mk.p2','menos probabilidad de lograr hablar con él si se espera más de una hora.','p')}</div>
    ${t('mk.src','Elkington y Oldroyd, MIT e InsideSales, Lead Response Management Study (2007).','small')}</div>`;},
   enter(el){ $$('[data-count]',el).forEach((n,i)=>countUp(n,+n.dataset.count,1200,700+i*150,n.dataset.suf)); clearTimeout(el._pk); $$('.ag',el).forEach(a=>a.classList.remove('lit','dim')); $$('.pl0',el).forEach(p=>p.classList.remove('win'));
     el._pk=setTimeout(()=>{ $$('.ag',el).forEach((a,i)=>a.classList.add(i===0?'lit':'dim')); const w=el.querySelector('[data-pl="0"]'); if(w) w.classList.add('win'); },REDUCE?100:2300); },
   leave(el){ clearTimeout(el._pk); }});
 
-// Competencia
-const SVC=['Au Pair','Work & Travel y Camp','Pasantías','Docentes','Estudio y trabajo','Idiomas afuera','Universidades','Viajes y visas'];
-const COMP=[ // nombre, ciudades, servicios (1/0 en el orden de SVC), grupo, x, y
- ['Educultura','Cochabamba',[1,1,1,1,1,1,1,1],-1,690,300],
- ['Ciudad Mundo','La Paz · Santa Cruz',[0,1,1,1,0,1,0,0],0,215,170],
- ['Overseas Bolivia','En línea',[1,1,1,1,0,0,0,0],0,370,120],
- ['Au Pair Bolivia','La Paz · Santa Cruz',[1,0,0,0,0,0,0,0],0,190,330],
- ['Global Work & Travel','En línea',[1,1,1,1,0,1,0,0],0,385,295],
- ['Bolanda','Santa Cruz',[0,0,0,0,1,1,1,0],1,1040,130],
- ['Bridge Viajes y School','Cochabamba',[0,0,0,0,1,1,0,1],1,1215,215],
- ['SERES Bolivia','Santa Cruz',[0,0,0,0,1,1,1,1],2,925,450],
- ['Extudia','Cochabamba · La Paz',[0,0,0,0,1,1,1,0],2,1120,480]];
-const CGR=[['Trabajo y Au Pair en EE.UU.',300,235,250,185,'var(--c1)'],['Estudio y trabajo en Europa',1125,175,215,135,'var(--c3)'],['Estudios e idiomas',1020,465,225,120,'var(--c2)']];
-SL.push({id:'competencia',title:'Competencia',blobs:[[1260,-340,.7,.55],[-380,620,.65,.55],[1420,700,.3,.4]],html:()=>`
-  <div class="cph">${h('cp.h','Con quién compite')}<div class="tog2" data-a="fade" style="--dl:.3s"><button data-v="map" class="on">${esc(T('cp.b1','Mapa'))}</button><button data-v="svc">${esc(T('cp.b2','Servicios'))}</button></div></div>
-  <div class="cpv" data-v="map"><svg class="cmap" viewBox="0 0 1400 590">
-    ${CGR.map((g,i)=>`<ellipse class="cg" cx="${g[1]}" cy="${g[2]}" rx="${g[3]}" ry="${g[4]}" style="fill:${g[5]};--dl:${.2+i*.15}s"/><text class="cgl" x="${g[1]}" y="${g[2]-g[4]+30}" text-anchor="middle">${esc(T('cp.g'+i,g[0]))}</text>`).join('')}
-    ${CGR.map((g,i)=>`<line class="clk" x1="${COMP[0][4]}" y1="${COMP[0][5]}" x2="${g[1]}" y2="${g[2]}"/>`).join('')}
-    ${COMP.map((c,i)=>{ const n=c[2].reduce((a,b)=>a+b,0), r=i?9+n*3.2:44; return `<g class="cpt ${i?'':'us'}" style="--dl:${.5+i*.08}s"><circle cx="${c[4]}" cy="${c[5]}" r="${r}" class="${i?['k0','k1','k2'][c[3]]:'ku'}"/><text x="${c[4]}" y="${c[5]+r+22}" text-anchor="middle">${esc(c[0])}</text>${i?'':`<text class="cin" x="${c[4]}" y="${c[5]+7}" text-anchor="middle">8/8</text>`}</g>`; }).join('')}
-   </svg>${t('cp.n1','Agrupadas por los servicios que tienen en común. El tamaño indica cuántos servicios ofrece cada una.','p','cnote')}</div>
-  <div class="cpv" data-v="svc" hidden><div class="cmx"><div class="cr ch"><span></span>${SVC.map((v,j)=>`<span>${esc(T('cp.s'+j,v))}</span>`).join('')}<span>${esc(T('cp.tot','Total'))}</span></div>
-    ${COMP.map((c,i)=>`<div class="cr ${i?'':'us'}"><b>${esc(c[0])}<small>${esc(c[1])}</small></b>${c[2].map((v,j)=>`<span>${v?`<i class="${i?['k0','k1','k2'][c[3]]:'ku'}"></i>`:'<i class="o"></i>'}</span>`).join('')}<span class="tt2">${c[2].reduce((a,b)=>a+b,0)}</span></div>`).join('')}
-    <div class="cr cf"><b>${esc(T('cp.cs','Competidores por servicio'))}</b>${SVC.map((v,j)=>`<span>${COMP.slice(1).reduce((a,c)=>a+c[2][j],0)}</span>`).join('')}<span></span></div></div>
-   ${t('cp.n2','Datos de los sitios y redes de cada agencia, octubre 2026.','p','cnote')}</div>`,
-  init(el){ el.querySelector('.tog2').addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b||editing()) return; $$('.tog2 button',el).forEach(x=>x.classList.toggle('on',x===b)); $$('.cpv',el).forEach(v=>v.hidden=v.dataset.v!==b.dataset.v); }); }});
-
-// Prueba de respuesta
-const RSP=['Ciudad Mundo','Au Pair Bolivia','SERES Bolivia','Bolanda','Bridge Viajes y School','Overseas Bolivia','Educultura'];
-const rv=v=>{ const x=String(v??'').trim(); if(!x) return null; const n=parseFloat(x.replace(',','.')); return isFinite(n)?n:'no'; };
-const rtxt=v=>v==null?'—':v==='no'?T('rs.no','Sin respuesta'):(v<60?fmt(v)+' min':(v/60).toFixed(1).replace('.',',').replace(',0','')+' h');
-SL.push({id:'respuesta',title:'Prueba de respuesta',blobs:[[-380,-340,.7,.5],[1320,640,.6,.5],[1400,-260,.35,.5]],html:()=>`
-  ${h('rs.h','¿Cuánto tarda el sector en responder?')}
-  <div class="rsp2"><div><div class="rlist" data-a="rise" style="--dl:.3s"></div>${t('rs.tip','Minutos hasta la primera respuesta. Si no respondieron, escriban «no».','p','cnote')}</div>
-   <div class="rside g3" data-a="pop" style="--dl:.6s"><b class="ravg">—</b>${t('rs.p','tiempo promedio de primera respuesta en el sector.','p')}
-    ${t('rs.s','Escribimos a cada agencia por WhatsApp como un interesado común, el mismo día y con la misma pregunta.','small')}</div></div>`,
-  init(el){ rRender(el); el.querySelector('.rlist').addEventListener('input',e=>{ const x=e.target; if(!x.dataset.r) return; S.resp[x.dataset.r]=x.value; rBars(el); save(); }); },
-  enter(el){ rBars(el,true); }});
-function rRender(el){ const L=el.querySelector('.rlist'); if(!L) return;
-  L.innerHTML=RSP.map((n,i)=>`<div class="rrow ${n==='Educultura'?'us':''}"><span class="nm2">${esc(n==='Educultura'?(S.cfg.client||n):n)}</span><span class="rtr"><i data-b="${i}"></i>${i===0?`<span class="hl"><em>${esc(T('rs.hl','1 hora'))}</em></span>`:'<span class="hl"></span>'}</span><label class="rin"><input type="text" inputmode="decimal" data-r="${esc(n)}" value="${esc(S.resp[n]??'')}" placeholder="—"><span>min</span></label></div>`).join('');
-  rBars(el); }
-function rBars(el,anim){ const vs=RSP.map(n=>rv(S.resp[n])); const nums=vs.filter(v=>typeof v==='number'); const mx=Math.max(120,...nums)*1.08;
-  $$('.rtr .hl',el).forEach(h=>h.style.left=(60/mx*100)+'%');
-  vs.forEach((v,i)=>{ const b=el.querySelector(`[data-b="${i}"]`); if(!b) return; b.className=v==='no'?'no':(RSP[i]==='Educultura'?'g2':(typeof v==='number'&&v<=60?'g4':'g1'));
-    const w=v==null?0:v==='no'?100:Math.max(2,v/mx*100); if(anim){ b.style.width='0'; void b.offsetWidth; } b.style.width=w+'%'; b.title=rtxt(v); });
-  const oth=RSP.map((n,i)=>n==='Educultura'?null:vs[i]).filter(v=>typeof v==='number'); const a=el.querySelector('.ravg');
-  if(a) a.textContent=oth.length?rtxt(oth.reduce((x,y)=>x+y,0)/oth.length):'—'; }
+// Simulador de ahorro (hoja Propuesta_educultura)
+const SIM0={cli:30,mh:7,md:5,sueldo:3300,hm:160,hd:8,dias:20,man:90};
+const simV=()=>({...SIM0,...(S.sim||{})});
+function simCalc(){ const v=simV(); const ch=v.sueldo/v.hm, cm=ch/60; const cH=v.mh*cm, cD=v.md*cm; const dH=cH*v.cli, dD=cD*v.cli; const aD=dH-dD, aM=aD*v.dias;
+  const manH=v.man/100, manD=v.mh>0?Math.max(0,Math.min(1,manH*v.md/v.mh)):manH; const hrs=(v.mh-v.md)*v.cli*v.dias/60;
+  return {v,ch,cm,cH,cD,dH,dD,aD,aM,manH,manD,hrs}; }
+const bs=(n,d=2)=>'Bs '+(n<0?'-':'')+Math.abs(n).toFixed(d).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const pc=n=>Math.round(n*100)+'%';
+SL.push({id:'ahorro',title:'Simulador de ahorro',blobs:[[1260,-340,.7,.55],[-380,620,.65,.55],[1420,700,.3,.4]],html:()=>`
+  ${h('sv.h','Lo que cuesta atender cada consulta')}${t('sv.p','Cambien los minutos y las consultas para ver cuánto se ahorra con el sistema.','p','lead')}
+  <div class="svw">
+   <div class="svin" data-a="rise" style="--dl:.3s">
+    ${[['cli','sv.i1','Consultas por día',''],['mh','sv.i2','Minutos por consulta hoy','min'],['md','sv.i3','Minutos por consulta con DC','min']].map(f=>`<div class="svf"><span>${t(f[1],f[2])}</span><div class="stp"><button data-sd="${f[0]}" data-d="-1" aria-label="Menos">−</button><input type="text" inputmode="decimal" data-sv="${f[0]}"><button data-sd="${f[0]}" data-d="1" aria-label="Más">+</button></div></div>`).join('')}
+    <div class="svfx">${t('sv.fx','Supuestos fijos','b')}<div id="svFix"></div></div>
+   </div>
+   <div class="svtb" data-a="rise" style="--dl:.45s"><div class="svr svh"><span></span><span>${esc(T('sv.c1','Hoy'))}</span><span class="dc">${esc(T('sv.c2','Con DC'))}</span></div><div id="svRows"></div>
+    <button class="svgo g3" id="svGo">${ic('chart')}${esc(T('sv.go','Calcular'))}</button></div>
+  </div>
+  <div class="svm" id="svm" hidden><div class="svc" id="svc"></div></div>`,
+  init(el){ simFill(el);
+    el.querySelector('.svin').addEventListener('input',e=>{ const x=e.target; if(!x.dataset.sv) return; const n=parseFloat(x.value.replace(',','.')); if(!isFinite(n)||n<0) return; S.sim={...(S.sim||{}),[x.dataset.sv]:n}; simRows(el); save(); });
+    el.querySelector('.svin').addEventListener('click',e=>{ const b=e.target.closest('[data-sd]'); if(!b||editing()) return; const k=b.dataset.sd, v=simV(); const n=Math.max(k==='cli'?1:.5,(v[k]||0)+(+b.dataset.d)*(k==='cli'?5:1)); S.sim={...(S.sim||{}),[k]:n}; simFill(el); save(); });
+    el.querySelector('#svGo').addEventListener('click',()=>{ if(!editing()) simOpen(el,'res'); });
+    el.querySelector('#svm').addEventListener('click',e=>{ if(e.target.id==='svm'||e.target.closest('[data-svx]')){ simClose(el); return; } const g=e.target.closest('[data-svgo]'); if(g) simOpen(el,g.dataset.svgo); }); },
+  leave(el){ simClose(el); }});
+function simFill(el){ const v=simV(); $$('[data-sv]',el).forEach(i=>{ if(document.activeElement!==i) i.value=String(v[i.dataset.sv]).replace('.',','); }); simRows(el); }
+function simRows(el){ const r=simCalc(), v=r.v; const fx_=el.querySelector('#svFix');
+  if(fx_) fx_.innerHTML=[[`Sueldo mínimo ${bs(v.sueldo,0)}`],[`${v.hm} horas al mes`],[`${v.hd} horas al día`],[`${v.dias} días hábiles`],[`${v.man}% de la jornada en tareas manuales`]].map(x=>`<i>${esc(x[0])}</i>`).join('');
+  const rows=[['Costo por hora del asesor',bs(r.ch),bs(r.ch)],['Costo por consulta',bs(r.cH),bs(r.cD)],['Costo de atención al día',bs(r.dH),bs(r.dD)]];
+  el.querySelector('#svRows').innerHTML=rows.map((x,i)=>`<div class="svr"><span>${esc(T('sv.r'+i,x[0]))}</span><b>${x[1]}</b><b class="dc">${x[2]}</b></div>`).join('')+`<div class="svr svt"><span>${esc(T('sv.r3','Ahorro al mes'))}</span><b></b><b class="dc ${r.aM>0?'ok':''}">${bs(r.aM)}</b></div>`; }
+const PIEC={hoyM:[214,120,120],hoyS:[244,206,206],dcM:[214,234,222],dcS:[88,170,124]};
+function simClose(el){ const m=el.querySelector('#svm'); if(m) m.hidden=true; el._svr=(el._svr||0)+1; }
+function simOpen(el,view){ const m=el.querySelector('#svm'), c=el.querySelector('#svc'), r=simCalc(); const run=el._svr=(el._svr||0)+1; m.hidden=false;
+  if(view==='mej'){ const MJ=[['shield','Menos errores humanos','La información se registra una sola vez y no depende de la memoria de cada asesor.'],['card','Reducción de costos',`Alrededor de ${bs(r.aM,0)} al mes en tiempo de atención.`],['trend','Más tiempo para tareas estratégicas','El tiempo que se libera se puede usar en:']];
+    const SUB=['Asistir a más eventos y ferias','Organizar las redes sociales','Grabar más videos','Encontrar nuevos clientes','Hacer nuevos contactos'];
+    c.innerHTML=`<div class="svch"><h3>${esc(T('sv.mh','Mejoras con el sistema'))}</h3><button class="mx" data-svx aria-label="Cerrar">${ic('x')}</button></div>
+     <div class="mjl">${MJ.map((x,i)=>`<div class="mj" style="--d:${.15+i*.18}s"><span class="ci ${['g1','g2','g3'][i]}">${ic(x[0])}</span><div>${t('sv.mj'+i,x[1],'b')}<span>${esc(i===1?x[2]:T('sv.md'+i,x[2]))}</span>${i===2?`<div class="mjs">${SUB.map((s_,j)=>`<i style="--d:${.75+j*.1}s">${t('sv.ms'+j,s_)}</i>`).join('')}</div>`:''}</div></div>`).join('')}</div>
+     <div class="svf2"><button class="sb2" data-svgo="res">${ic('chart')}${esc(T('sv.br','Ver resultados'))}</button><button class="sb2 pr" data-svx>${esc(T('sv.bv','Volver a la simulación'))}</button></div>`;
+    if(editing()) setEditable(c,true); return; }
+  const ok=r.aM>0;
+  c.innerHTML=`<div class="svch"><h3>${esc(T('sv.rh','Resultado con DC'))}</h3><button class="mx" data-svx aria-label="Cerrar">${ic('x')}</button></div>
+   <div class="svres">
+    <div class="svk">
+     <div class="kb1 st" style="--d:.15s"><small>${esc(T('sv.k1','Ahorro al mes'))}</small><b id="svA">${ok?bs(0,0):'—'}</b><span>${ok?`${bs(r.aD)} ${esc(T('sv.k1b','al día'))} · ${fmt(r.hrs)} ${esc(T('sv.k1c','horas liberadas al mes'))}`:esc(T('sv.k1n','Con DC el tiempo por consulta debe ser menor que hoy.'))}</span></div>
+     <div class="kb2 st" style="--d:.55s"><small>${esc(T('sv.k2','Jornada del asesor'))}</small>
+      <div class="kr"><em>${esc(T('sv.km','Manual'))}</em><b>${pc(r.manH)}</b><i>→</i><b class="to" id="svMa">${pc(r.manH)}</b></div>
+      <div class="kr"><em>${esc(T('sv.ks','Estratégica'))}</em><b>${pc(1-r.manH)}</b><i>→</i><b class="to" id="svSt">${pc(1-r.manH)}</b></div></div>
+    </div>
+    <div class="svpie st" style="--d:.9s"><div class="pie" id="svPie"><div class="phole"><b id="svPL">${esc(T('sv.ph','Hoy'))}</b><small id="svPS">${esc(T('sv.pc','Crítico'))}</small></div></div>
+     <div class="plg"><span><i id="svLm"></i>${esc(T('sv.km','Manual'))}</span><span><i id="svLs"></i>${esc(T('sv.ks','Estratégica'))}</span></div></div>
+   </div>
+   <div class="svf2"><button class="sb2" data-svgo="res">${ic('redo')}${esc(T('sv.rp','Ver de nuevo'))}</button><button class="sb2 pr" data-svgo="mej">${ic('spark')}${esc(T('sv.bm','Mejoras'))}</button></div>`;
+  const pie=c.querySelector('#svPie'), lm=c.querySelector('#svLm'), ls=c.querySelector('#svLs'), A=c.querySelector('#svA'), Ma=c.querySelector('#svMa'), St=c.querySelector('#svSt');
+  const mix=(a_,b_,u)=>`rgb(${a_.map((x,i)=>Math.round(x+(b_[i]-x)*u)).join(',')})`;
+  const paint=u=>{ const man=r.manH+(r.manD-r.manH)*u, s_=(1-man)*100, cm=mix(PIEC.hoyM,PIEC.dcM,u), cs=mix(PIEC.hoyS,PIEC.dcS,u);
+    pie.style.background=`conic-gradient(${cs} 0 ${s_}%, ${cm} ${s_}% 100%)`; lm.style.background=cm; ls.style.background=cs; Ma.textContent=pc(man); St.textContent=pc(1-man); };
+  paint(0); const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+  if(ok){ const t0=performance.now()+400; const cnt=now=>{ if(run!==el._svr) return; const u=Math.max(0,Math.min(1,(now-t0)/1300)); A.textContent=bs(r.aM*ease(u),u<1?0:2); if(u<1) requestAnimationFrame(cnt); }; requestAnimationFrame(cnt); }
+  setTimeout(()=>{ if(run!==el._svr) return; const t0=performance.now(), D=REDUCE?1:1900; const step=now=>{ if(run!==el._svr) return; const u=Math.min(1,(now-t0)/D); paint(ease(u)); if(u>=.5){ c.querySelector('#svPL').textContent=T('sv.pd','Con DC'); const ps=c.querySelector('#svPS'); ps.textContent=T('sv.pm','Mejora'); ps.classList.add('ok'); Ma.classList.add('kg'); St.classList.add('kg'); } if(u<1) requestAnimationFrame(step); }; requestAnimationFrame(step); },REDUCE?0:2300);
+  if(editing()) setEditable(c,true); }
 
 // Lo que solemos ver
 const PAT=[['file','g1','Una lista por programa','La misma persona termina en dos o tres listas y nadie sabe cuál está al día.'],
@@ -1059,7 +1178,7 @@ function selMod(el,k,first){ const m=MODS.find(x=>x.k===k), p=el.querySelector('
   $$('.mb',el).forEach(b=>b.classList.toggle('on',b.dataset.m===k)); $$('.ln',el).forEach(l=>l.classList.toggle('on',l.dataset.m===k));
   const pl=tierOf(m)==='X'?T('s6.add','Módulo adicional'):T('s6.from','Desde el plan')+' '+planN(tierOf(m));
   p.innerHTML=`<div class="hd"><span class="bub g3">${ic(m.ic)}</span><div>${t('m.'+k+'.n',m.n,'h3')}<span class="pl">${esc(pl)}</span></div></div>${t('m.'+k+'.d',m.d,'p')}
-   <ul>${m.f.map((f,j)=>`<li><span class="ck g2">${ic('check')}</span>${t('m.'+k+'.f'+j,f)}</li>`).join('')}</ul>`;
+   <ul>${fnOf(m).map((f,j)=>`<li><span class="ck g2">${ic('check')}</span>${t('m.'+k+'.f'+j,f[0])}</li>`).join('')}</ul>`;
   p.classList.remove('sw2'); void p.offsetWidth; if(!first) p.classList.add('sw2'); if(document.body.classList.contains('edit')) setEditable(p,true); }
 
 // 7 Árbol de decisión (de arriba hacia abajo, con n de ejemplo)
@@ -1138,7 +1257,7 @@ SL.push({id:'recibe',title:'Lo que recibe',blobs:[[1260,-340,.75,.6],[-380,600,.
 
 // 13 Armemos tu plan
 SL.push({id:'armemos',title:'Armemos tu plan',blobs:[[1300,-360,.65,.5],[-400,640,.6,.5],[1420,700,.3,.4]],html:()=>`${h('s13.h','Armemos tu plan')}${t('s13.p','Elijan los módulos y el plan sale solo. Toquen «Ver» para conocer cada función.','p','lead')}
-  <div class="bld"><div><div class="mg" id="mg">${MODS.map((m,i)=>`<button class="mt" data-m="${m.k}" data-a="pop" style="--dl:${.35+i*.06}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n,'b')}<span>${m.f.length} ${esc(T('s13.fn','funciones'))}</span><span class="mtg"><i class="dif d${difOf(m)}">${esc(DIFN[difOf(m)])}</i><i data-wk="${m.k}">${esc(wkOf(m))}</i></span><em class="inf" data-inf="${m.k}">${esc(T('s13.ver','Ver'))}</em><i class="tg"></i></button>`).join('')}</div>
+  <div class="bld"><div><div class="mg" id="mg">${MODS.map((m,i)=>`<button class="mt" data-m="${m.k}" data-a="pop" style="--dl:${.35+i*.06}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n,'b')}<span>${fnOf(m).length} ${esc(T('s13.fn','funciones'))}</span><em class="inf" data-inf="${m.k}">${esc(T('s13.ver','Ver'))}</em><i class="tg"></i></button>`).join('')}</div>
    <div class="req" data-a="rise" style="--dl:.9s"><input id="reqIn" placeholder="${esc(T('s13.ph','Pedido especial de Educultura'))}"><button class="g3" id="reqAdd">${ic('plus')}${esc(T('s13.add','Sumar'))}</button></div><div class="reqs" id="reqs"></div></div>
    <div class="sumc g3" data-a="rise" style="--dl:.5s" id="sumc"></div></div>
   <div class="mdl" id="mdl" hidden><div class="mdc" id="mdc"></div></div>`,
@@ -1149,9 +1268,9 @@ SL.push({id:'armemos',title:'Armemos tu plan',blobs:[[1300,-360,.65,.5],[-400,64
     el.querySelector('#reqs').addEventListener('click',e=>{const b=e.target.closest('button[data-r]'); if(!b) return; S.reqs.splice(+b.dataset.r,1); syncPlan(); save();}); },
   leave(el){ el.querySelector('#mdl').hidden=true; }});
 function openMod(el,k){ const m=MODS.find(x=>x.k===k), on=!!S.mods[k], md=el.querySelector('#mdl'), c=el.querySelector('#mdc');
-  c.innerHTML=`<div class="mdh"><span class="bub g3">${ic(m.ic)}</span><div>${t('m.'+k+'.n',m.n,'h3')}<div class="mtags"><i class="pl">${esc(tierN(tierOf(m)))}</i><i class="dif d${difOf(m)}">${esc(T('s13.dif','Dificultad'))} ${esc(DIFN[difOf(m)].toLowerCase())}</i><i>${esc(T('s13.tp','Tiempo'))}: ${esc(wkOf(m))}</i></div></div><button class="mx" data-mx aria-label="Cerrar">${ic('x')}</button></div>
+  c.innerHTML=`<div class="mdh"><span class="bub g3">${ic(m.ic)}</span><div>${t('m.'+k+'.n',m.n,'h3')}</div><button class="mx" data-mx aria-label="Cerrar">${ic('x')}</button></div>
    ${t('m.'+k+'.d',m.d,'p','mdd')}
-   <ol class="mfl">${m.f.map((f,j)=>`<li><em class="${['g1','g2','g4','g3'][j%4]}">${j+1}</em><div>${t('m.'+k+'.f'+j,f,'b')}${t('m.'+k+'.fd'+j,(m.fd||[])[j]||'','span')}</div></li>`).join('')}</ol>
+   <ol class="mfl">${fnOf(m).map((f,j)=>`<li><em class="${['g1','g2','g4','g3'][j%4]}">${j+1}</em><div>${t('m.'+k+'.f'+j,f[0],'b')}${f[1]?t('m.'+k+'.fd'+j,f[1],'span'):''}</div></li>`).join('')}</ol>
    <div class="mdf"><button class="${on?'off':'g3'}" data-mtog="${k}">${ic(on?'x':'plus')}${esc(on?T('s13.qt','Quitar del plan'):T('s13.in','Incluir en el plan'))}</button></div>`;
   md.hidden=false; c.classList.remove('sw2'); void c.offsetWidth; c.classList.add('sw2'); if(editing()) setEditable(c,true); }
 function sumHTML(full){ const p=planOf(); const mods=MODS.filter(m=>S.mods[m.k]);
@@ -1205,6 +1324,29 @@ function renderMed(el){ el=el||document.querySelector('.sl[data-id="medida"]'); 
    <div class="sws2">${[0,1,2,3,4].map(i=>`<button data-cc="${i}" class="${ci===i?'on':''}" style="background:var(--c${i+1})" aria-label="Color ${i+1}"></button>`).join('')}</div>`; }
 function refreshDyn(){ const o=document.querySelector('.sl[data-id="operacion"]'); if(o) renderQ(o); renderMed(); }
 
+// Estética del sistema
+const SPAL=[['Océano','#1F4E9C','#2FB3E0'],['Bosque','#2D6A4F','#52B788'],['Atardecer','#C2410C','#F59E0B'],['Ciruela','#6D3FB5','#E36397'],['Grafito','#2E3440','#5E81AC'],['Coral','#0F7173','#F05D5E']];
+const sysCols=()=>S.sysPal===-1&&S.sysCus?[T('se.cus','Personalizada'),S.sysCus[0],S.sysCus[1]]:SPAL[Math.max(0,Math.min(SPAL.length-1,S.sysPal||0))];
+SL.push({id:'estetica',title:'Estética',blobs:[[-380,-340,.7,.5],[1320,640,.6,.5],[1400,-260,.35,.5]],html:()=>`
+  ${h('se.h','Elijan el estilo de su sistema')}${t('se.p','Toquen una paleta y vean cómo se vería su pantalla.','p','lead')}
+  <div class="sew"><div class="sep" data-a="rise" style="--dl:.3s"><div class="sepg" id="sePg"></div>
+    <div class="secu"><b>${esc(T('se.cus','Personalizada'))}</b><label><input type="color" id="seC1"><span>${esc(T('se.c1','Principal'))}</span></label><label><input type="color" id="seC2"><span>${esc(T('se.c2','Acento'))}</span></label></div></div>
+   <div class="sem" data-a="zoom" style="--dl:.45s" id="seM">
+    <aside><div class="sl1"><b>${esc((S.cfg.client||'E').slice(0,1))}</b><span data-bind="client"></span></div>${[['inbox','Consultas'],['route','Seguimiento'],['ucheck','Postulantes'],['chart','Reportes'],['cal','Agenda']].map((x,i)=>`<i class="${i?'':'on'}">${ic(x[0])}${esc(T('se.n'+i,x[1]))}</i>`).join('')}</aside>
+    <main><header><b>${esc(T('se.t','Consultas de hoy'))}</b><span class="sbtn">${ic('plus')}${esc(T('se.b','Nueva consulta'))}</span></header>
+     <div class="skp">${[['24','Nuevas'],['9','Por llamar'],['3','Inscritos']].map((k,i)=>`<div class="${i===0?'hi':''}"><b>${k[0]}</b><span>${esc(T('se.k'+i,k[1]))}</span></div>`).join('')}</div>
+     <div class="sgr"><div class="sch">${[40,62,48,75,58,88,70].map((v,i)=>`<i style="height:${v}%" class="${i===5?'hi':''}"></i>`).join('')}</div>
+      <div class="sls">${[['Camila R.','Au Pair','Nueva'],['Diego M.','Work & Travel','Llamar'],['Lucía P.','Pasantía','Inscrita'],['Andrés V.','Irlanda','Nueva']].map((r,i)=>`<div><span class="av2">${r[0][0]}</span><b>${r[0]}</b><em>${r[1]}</em><i class="st${i%3}">${r[2]}</i></div>`).join('')}</div></div></main>
+    <div class="srp" id="seRp"></div></div></div>`,
+  init(el){ seRender(el,false);
+    el.querySelector('#sePg').addEventListener('click',e=>{ const b=e.target.closest('[data-sp]'); if(!b||editing()) return; S.sysPal=+b.dataset.sp; seRender(el,true,b); save(); });
+    ['seC1','seC2'].forEach((id,i)=>el.querySelector('#'+id).addEventListener('input',e=>{ const c=sysCols(); const cur=[c[1],c[2]]; cur[i]=e.target.value; S.sysCus=cur; S.sysPal=-1; seRender(el,false); save(); })); }});
+function seRender(el,ripple,src){ const c=sysCols(), M=el.querySelector('#seM');
+  el.querySelector('#sePg').innerHTML=SPAL.map((p,i)=>`<button data-sp="${i}" class="${S.sysPal===i?'on':''}"><span class="sw2"><i style="background:${p[1]}"></i><i style="background:${p[2]}"></i></span><b>${esc(T('se.p'+i,p[0]))}</b></button>`).join('');
+  el.querySelector('#seC1').value=c[1]; el.querySelector('#seC2').value=c[2]; el.querySelector('.secu').classList.toggle('on',S.sysPal===-1);
+  const apply=()=>{ M.style.setProperty('--sp',c[1]); M.style.setProperty('--sa',c[2]); };
+  if(ripple&&!REDUCE){ const rp=el.querySelector('#seRp'); rp.style.background=c[1]; rp.classList.remove('go'); void rp.offsetWidth; rp.classList.add('go'); setTimeout(apply,260); } else apply(); }
+
 // 14 Acompañamiento: entrada + ciclo que se repite por tramo
 const RC=[660,510], RR=190;
 const RN=[[RC[0]-RR,RC[1],'s14.p1',1,'tl'],[RC[0],RC[1]-RR,'s14.p2',2,'t'],[RC[0]+RR,RC[1],'s14.p3',3,'r'],[RC[0],RC[1]+RR,'s14.p4',4,'d']];
@@ -1257,12 +1399,17 @@ const firstI=()=>Math.max(0,SL.findIndex((s,i)=>!isHid(i))), lastI=()=>{ for(let
 function renderDots(){ $('#dots').innerHTML=SL.map((s,i)=>isHid(i)?'':`<i data-i="${i}" title="${esc(s.title)}" class="${i===cur?'on':''}"></i>`).join(''); }
 function splitAll(root=document){ $$('[data-split]',root).forEach(el=>{ const w=el.textContent.trim().split(/\s+/); el.innerHTML=w.map(x=>`<span class="w"><i>${esc(x)}</i></span>`).join(' '); }); }
 function unsplitAll(){ $$('[data-split]').forEach(el=>{ el.textContent=el.textContent; }); }
+function animHeads(el){ $$('[data-split]',el).forEach(hd=>{ const base=parseFloat(hd.dataset.d||'0.12'); $$('.w>i',hd).forEach((w,j)=>{ w.classList.remove('in'); void w.offsetWidth; w.style.setProperty('--dl',(base+j*.06)+'s'); w.classList.add('in'); }); }); }
+function enterSlide(el,i){ el._played=false; if(S.autoAnim||i===firstI()||editing()){ animIn(el); SL[i].enter&&SL[i].enter(el); el._played=true; } else { $$('[data-a]',el).forEach(x=>x.classList.remove('in','done')); animHeads(el); } updAnc(); }
+function playSlide(){ const el=slides()[cur]; if(!el||editing()) return; if(el._played){ resetSlide(); setTimeout(playSlide,60); return; } animIn(el); SL[cur].enter&&SL[cur].enter(el); el._played=true; updAnc(); }
+function resetSlide(){ const el=slides()[cur]; if(!el||editing()) return; SL[cur].leave&&SL[cur].leave(el); $$('[data-a]',el).forEach(x=>x.classList.remove('in','done')); el._played=false; updAnc(); }
+function updAnc(){ const a=$('#anc'); if(!a) return; const el=slides()[cur]; a.hidden=cur===firstI(); a.classList.toggle('wait',!!el&&!el._played&&!editing()); }
 function animIn(el){ const items=$$('[data-a]',el); items.forEach(x=>x.classList.remove('in','done')); $$('.w>i',el).forEach(x=>x.classList.remove('in')); void el.offsetWidth;
   items.forEach(x=>x.classList.add('in'));
   $$('[data-split]',el).forEach(hd=>{ const base=parseFloat(hd.dataset.d||'0.12'); $$('.w>i',hd).forEach((w,j)=>{ w.style.setProperty('--dl',(base+j*.06)+'s'); w.classList.add('in'); }); }); }
 function go(i,force){ i=Math.max(0,Math.min(SL.length-1,i)); const all=slides(); if(i===cur&&!force&&all[i].classList.contains('act')) return;
   const prev=all[cur]; if(prev&&prev!==all[i]){ prev.classList.remove('act'); SL[cur].leave&&SL[cur].leave(prev); }
-  cur=i; const el=all[i]; el.classList.add('act'); animIn(el); SL[i].enter&&SL[i].enter(el);
+  cur=i; const el=all[i]; el.classList.add('act'); enterSlide(el,i);
   $$('.blob').forEach((b,k)=>{ const c=SL[i].blobs[k]; b.style.transform=`translate(${c[0]}px,${c[1]}px) scale(${c[2]})`; b.style.opacity=c[3]; });
   $$('.mark',el).forEach((m,k)=>{ m.classList.remove('hop','tilt','jelly','drop'); setTimeout(()=>{ if(cur===i) playMark(m,'drop'); },(i===0?650:350)+k*200); });
   $$('#dots i').forEach(d=>d.classList.toggle('on',+d.dataset.i===i)); try{ sessionStorage.setItem('dc-slide',i); }catch(e){} }
@@ -1293,10 +1440,14 @@ $('#dots').addEventListener('click',e=>{const d=e.target.closest('i'); if(d) go(
 addEventListener('keydown',e=>{ const tg=e.target; if(tg.matches&&tg.matches('input,textarea,select')||tg.isContentEditable) return;
   if(['ArrowRight','PageDown',' '].includes(e.key)){ e.preventDefault(); go(nextI(1)); }
   else if(['ArrowLeft','PageUp'].includes(e.key)){ e.preventDefault(); go(nextI(-1)); }
+  else if(e.key==='ArrowDown'){ e.preventDefault(); playSlide(); }
+  else if(e.key==='ArrowUp'){ e.preventDefault(); resetSlide(); }
   else if(e.key==='Home') go(firstI()); else if(e.key==='End') go(lastI());
   else if(e.key==='Escape'){ const md=document.querySelector('.mdl:not([hidden])'); if(md){ md.hidden=true; return; } if($('#ov').classList.contains('on')) toggleOv(false); else if($('#cfg').classList.contains('on')) $('#cfgX').click(); else if(document.body.classList.contains('present')) setPresent(false); } });
-let sx=null; $('#view').addEventListener('pointerdown',e=>{ if(e.target.closest('button,input,textarea,[data-k],a')) return; sx=[e.clientX,e.clientY]; });
-$('#view').addEventListener('pointerup',e=>{ if(!sx) return; const dx=e.clientX-sx[0],dy=e.clientY-sx[1]; sx=null; if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4) go(nextI(dx<0?1:-1)); });
+$('#anDn').addEventListener('click',e=>{ e.stopPropagation(); playSlide(); });
+$('#anUp').addEventListener('click',e=>{ e.stopPropagation(); resetSlide(); });
+let sx=null; $('#view').addEventListener('pointerdown',e=>{ sx=null; if(e.pointerType==='mouse'||e.target.closest('button,input,textarea,select,[data-k],a,label')) return; sx=[e.clientX,e.clientY]; });
+$('#view').addEventListener('pointerup',e=>{ if(!sx) return; const dx=e.clientX-sx[0],dy=e.clientY-sx[1]; sx=null; const sel=window.getSelection&&String(window.getSelection()); if(sel&&sel.trim()) return; if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4) go(nextI(dx<0?1:-1)); });
 
 /* herramientas */
 $('#tGrid').innerHTML=ic('grid'); $('#tEdit').innerHTML=ic('pen'); $('#tCfg').innerHTML=ic('gear'); $('#tPdf').innerHTML=ic('dl'); $('#tPlay').innerHTML=ic('play'); $('#cfgX').innerHTML=ic('x');
@@ -1344,7 +1495,12 @@ function setP(p,v){ const ks=p.split('.'); let o=S.cfg; ks.slice(0,-1).forEach(k
 function renderCfg(){ const b=$('#cfgBody'); let h_='';
   if(tab==='gen') h_=`<div class="grp">Marca</div>${fld('Sigla','mark','DC')}${fld('Nombre','name','DataCocha')}<div class="grp">Cliente</div>${fld('Nombre del cliente','client','Educultura')}
     <div class="grp">Datos</div><p class="hint">Todo se guarda solo y lo ven los demás socios que abren esta presentación.</p><button class="pbtn" id="rstAll">Restablecer toda la presentación</button>`;
-  if(tab==='mod') h_=`<p class="hint">Definan en qué plan entra cada módulo. El plan que ve el cliente sale del módulo más alto que elija.</p>${MODS.map(m=>`<div class="mce"><b>${esc(modN(m))}</b><div class="mcr"><label><span>Plan</span><select data-mt="${m.k}">${[['B',planN('B')],['E',planN('E')],['A',planN('A')],['X','Adicional']].map(([v,n])=>`<option value="${v}" ${tierOf(m)===v?'selected':''}>${esc(n)}</option>`).join('')}</select></label><label><span>Dificultad</span><select data-md="${m.k}">${[1,2,3].map(v=>`<option value="${v}" ${difOf(m)===v?'selected':''}>${DIFN[v]}</option>`).join('')}</select></label><label><span>Tiempo</span><input type="text" data-mw="${m.k}" value="${esc(wkOf(m))}"></label></div></div>`).join('')}
+  if(tab==='mod') h_=`<p class="hint">Definan en qué plan entra cada módulo. El plan que ve el cliente sale del módulo más alto que elija.</p>${MODS.map(m=>`<div class="mce"><b>${esc(modN(m))}</b><div class="mcr"><label><span>Plan</span><select data-mt="${m.k}">${[['B',planN('B')],['E',planN('E')],['A',planN('A')],['X','Adicional']].map(([v,n])=>`<option value="${v}" ${tierOf(m)===v?'selected':''}>${esc(n)}</option>`).join('')}</select></label><label><span>Dificultad</span><select data-md="${m.k}">${[1,2,3].map(v=>`<option value="${v}" ${difOf(m)===v?'selected':''}>${DIFN[v]}</option>`).join('')}</select></label><label><span>Tiempo</span><input type="text" data-mw="${m.k}" value="${esc(wkOf(m))}"></label></div>
+      <details class="mfe"><summary>Nombre, descripción y funciones (${fnOf(m).length})</summary>
+       <label class="fld"><span>Nombre</span><input type="text" data-mn="${m.k}" value="${esc(modN(m))}"></label>
+       <label class="fld"><span>Descripción</span><textarea data-mdd="${m.k}" rows="2">${esc(T('m.'+m.k+'.d',m.d))}</textarea></label>
+       ${fnOf(m).map((f,j)=>`<div class="fne"><div class="fnr"><b>${j+1}</b><input type="text" data-fn="${m.k}" data-j="${j}" value="${esc(f[0])}" placeholder="Función"><button class="pbtn sm" data-fx="${m.k}" data-j="${j}" aria-label="Quitar función">${ic('x')}</button></div><textarea data-fd="${m.k}" data-j="${j}" rows="2" placeholder="Qué hace, en una o dos líneas">${esc(f[1])}</textarea></div>`).join('')}
+       <button class="pbtn sm" data-fa="${m.k}">Agregar función</button></details></div>`).join('')}
     <div class="grp">Resumen</div>${PLANS.map(p=>`<p class="hint"><b>${esc(planN(p.t))}:</b> ${esc(MODS.filter(m=>tierOf(m)===p.t).map(modN).join(', ')||'—')}</p>`).join('')}<p class="hint"><b>Adicionales:</b> ${esc(MODS.filter(m=>tierOf(m)==='X').map(modN).join(', ')||'—')}</p><button class="pbtn" id="rstMod">Volver a lo original</button>`;
   if(tab==='pre') h_=`<div class="grp">Precios</div>${PLANS.map(p=>fld(planN(p.t),'price.'+p.t)).join('')}${fld('Módulos adicionales','price.X')}
     <div class="grp">Plazos por plan</div>${PLANS.map(p=>fld(planN(p.t),'plazo.'+p.t)).join('')}
@@ -1352,7 +1508,7 @@ function renderCfg(){ const b=$('#cfgBody'); let h_='';
   if(tab==='col') h_=`<div class="grp">Paletas</div><div class="pres">${PRESETS.map((pr,i)=>`<button data-pre="${i}" class="${pr[1].join()===S.colors.join()?'on':''}"><b>${esc(pr[0])}</b><span class="sws">${pr[1].map(c=>`<i style="background:${c}"></i>`).join('')}<i style="background:${pr[2]}"></i></span></button>`).join('')}</div><div class="grp">Ajuste fino</div>${S.colors.map((c,i)=>`<div class="colr"><input type="color" data-c="${i}" value="${c}"><input type="text" data-ch="${i}" value="${c}"></div>`).join('')}<button class="pbtn" id="rstCol">Volver a la paleta por defecto</button>`;
   if(tab==='txt') h_=`<label class="sw"><span>Editar textos sobre las diapositivas</span><input type="checkbox" id="swEdit" ${editing()?'checked':''}><i></i></label>
     <p class="hint">Con esto activo, haz clic en cualquier texto de las diapositivas y escribe encima. Enter para terminar.</p><div class="grp">Restaurar</div><button class="pbtn" id="rstTxt">Volver a los textos originales</button>`;
-  if(tab==='sl') h_=`<div class="grp">Diapositivas visibles</div>${SL.map((s,i)=>`<label class="sw"><span>${i+1}. ${esc(s.title)}</span><input type="checkbox" data-sl="${s.id}" ${isHid(i)?'':'checked'}><i></i></label>`).join('')}<div class="grp">Extras</div><label class="sw"><span>Burbuja de análisis estadístico al responder «desde cuándo guardan información»</span><input type="checkbox" id="swBub" ${S.bubble!==false?'checked':''}><i></i></label><div class="grp">Puntero</div><label class="sw"><span>Luz suave al mover el cursor</span><input type="checkbox" id="swSpot" ${S.spot?'checked':''}><i></i></label><p class="hint">Las ocultas no se borran: se vuelven a mostrar aquí.</p>`;
+  if(tab==='sl') h_=`<div class="grp">Diapositivas visibles</div>${SL.map((s,i)=>`<label class="sw"><span>${i+1}. ${esc(s.title)}</span><input type="checkbox" data-sl="${s.id}" ${isHid(i)?'':'checked'}><i></i></label>`).join('')}<div class="grp">Animaciones</div><label class="sw"><span>Animar solas al entrar a cada diapositiva</span><input type="checkbox" id="swAuto" ${S.autoAnim?'checked':''}><i></i></label><p class="hint">Apagado: desde la segunda diapositiva, las animaciones arrancan con el botón ▼ (o la flecha abajo) y se reinician con ▲ (o la flecha arriba).</p><div class="grp">Extras</div><label class="sw"><span>Burbuja de análisis estadístico al responder «desde cuándo guardan información»</span><input type="checkbox" id="swBub" ${S.bubble!==false?'checked':''}><i></i></label><div class="grp">Puntero</div><label class="sw"><span>Luz suave al mover el cursor</span><input type="checkbox" id="swSpot" ${S.spot?'checked':''}><i></i></label><p class="hint">Las ocultas no se borran: se vuelven a mostrar aquí.</p>`;
   if(tab==='qs') h_=`<div class="grp">Calculadora</div><p class="hint">Horas al mes = consultas al mes × % que requiere buscar historial × minutos por búsqueda ÷ 60, más las horas en reportes. Consultas sin seguimiento = consultas × % sin seguimiento. Inscritos que se van = esas consultas × % que se inscribe.</p>
     <label class="fld"><span>% de consultas en que se busca el historial</span><input type="text" id="cPct" value="${esc(S.calc.pct)}"></label>
     ${[['horas','Horas al mes'],['sin','Consultas sin seguimiento'],['resp','Tiempo de respuesta']].map(([k,n])=>`<label class="sw"><span>Mostrar "${n}" en el PDF</span><input type="checkbox" data-cs="${k}" ${S.calc.show[k]!==false?'checked':''}><i></i></label>`).join('')}
@@ -1375,6 +1531,9 @@ $('#cfgBody').addEventListener('input',e=>{ const x=e.target;
   if(x.dataset.ave!=null){ S.avisos[+x.dataset.ave].t=x.value; refreshDyn(); save(); }
   if(x.dataset.pge!=null){ S.progs[+x.dataset.pge].t=x.value; refreshDyn(); save(); }
   if(x.dataset.pf){ S.pdf[x.dataset.pf]=x.value; save(); }
+  if(x.dataset.mn){ S.texts['m.'+x.dataset.mn+'.n']=x.value; applyBinds(); save(); }
+  if(x.dataset.mdd){ S.texts['m.'+x.dataset.mdd+'.d']=x.value; save(); }
+  if(x.dataset.fn||x.dataset.fd){ const k=x.dataset.fn||x.dataset.fd, arr=fnBake(k); arr[+x.dataset.j][x.dataset.fn?0:1]=x.value; save(); }
   if(x.dataset.mw){ const k=x.dataset.mw; S.mcfg[k]={...(S.mcfg[k]||{}),wk:x.value}; $$(`[data-wk="${k}"]`).forEach(n=>n.textContent=x.value); save(); }
   if(x.dataset.p){ setP(x.dataset.p,x.value); applyBinds(); if(x.dataset.p.startsWith('phase')||x.dataset.p.startsWith('price')||x.dataset.p.startsWith('plazo')) syncPlan(); save(); }
   if(x.dataset.c){ S.colors[+x.dataset.c]=x.value; const tx=$(`[data-ch="${x.dataset.c}"]`); if(tx) tx.value=x.value; applyColors(); save(); }
@@ -1387,6 +1546,7 @@ $('#cfgBody').addEventListener('change',e=>{ const x=e.target; if(x.id==='swEdit
   if(x.dataset.sl){ const id=x.dataset.sl; S.hidden=S.hidden.filter(h_=>h_!==id); if(!x.checked) S.hidden.push(id); if(SL.every((s,i)=>isHid(i))){ S.hidden=S.hidden.filter(h_=>h_!==id); x.checked=true; } renderDots(); if(isHid(cur)){ const n=nextI(1); go(n!==cur?n:nextI(-1)); } save(); }
   if(x.id==='swSpot'){ S.spot=x.checked; save(); }
   if(x.id==='swBub'){ S.bubble=x.checked; save(); }
+  if(x.id==='swAuto'){ S.autoAnim=x.checked; save(); }
   if(x.dataset.ps){ S.pdf.sec[x.dataset.ps]=x.checked; save(); } });
 $('#cfgBody').addEventListener('click',e=>{ const id=e.target.id;
   const qd=e.target.closest('[data-qd]'); if(qd){ S.qs=S.qs.filter(q=>q.id!==qd.dataset.qd); refreshDyn(); renderCfg(); save(); return; }
@@ -1396,12 +1556,15 @@ $('#cfgBody').addEventListener('click',e=>{ const id=e.target.id;
   if(id==='avAdd'){ S.avisos.push({t:'Nuevo aviso',on:false}); refreshDyn(); renderCfg(); save(); return; }
   if(id==='pgAdd'){ S.progs.push({t:'Nuevo programa',on:false}); refreshDyn(); renderCfg(); save(); return; }
   if(id==='pdfNow'){ makePdf(); return; }
-  if(id==='rstMod'){ S.mcfg={}; const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); save(); return; }
+  const fa=e.target.closest('[data-fa]'); if(fa){ fnBake(fa.dataset.fa).push(['Nueva función','']); renderCfg(); $$(`details.mfe`).forEach(d_=>{ if(d_.querySelector(`[data-fa="${fa.dataset.fa}"]`)) d_.open=true; }); save(); return; }
+  const fxb=e.target.closest('[data-fx]'); if(fxb){ const k=fxb.dataset.fx; fnBake(k).splice(+fxb.dataset.j,1); renderCfg(); $$(`details.mfe`).forEach(d_=>{ if(d_.querySelector(`[data-fa="${k}"]`)) d_.open=true; }); save(); return; }
+  if(id==='rstMod'){ S.mcfg={}; Object.keys(S.texts).forEach(key=>{ if(/^m\.[a-z0-9]+\.(n|d|f\d+|fd\d+)$/.test(key)) delete S.texts[key]; }); const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); renderCfg(); save(); return; }
   const pb=e.target.closest('[data-pre]'); if(pb){ const pr=PRESETS[+pb.dataset.pre]; S.colors=[...pr[1]]; S.page=pr[2]; applyColors(); renderCfg(); save(); return; }
   if(id==='rstCol'){ S.colors=[...PAL0]; S.page=PAGE0; applyColors(); renderCfg(); save(); }
   if(id==='rstTxt'){ S.texts={}; const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); save(); toast('Textos restaurados'); }
   if(id==='rstAll'){ const keep=S; S=DEF(); applyColors(); render(); go(cur,true); renderCfg(); save(); toast('Presentación restablecida'); } });
 $('#cfgBody').addEventListener('keydown',e=>e.stopPropagation());
+$('#cfgBody').addEventListener('focusout',e=>{ const x=e.target; if(x.dataset&&(x.dataset.fn||x.dataset.fd||x.dataset.mn||x.dataset.mdd)){ const ed=editing(); render(); if(ed) setEditable(document,true); go(cur,true); } });
 
 /* guardado */
 let db=null, saveT=null; const DOC='presentaciones/dc-educultura';
@@ -1410,7 +1573,7 @@ function save(){ clearTimeout(saveT); st('Guardando…'); saveT=setTimeout(async
   try{ localStorage.setItem('dc-edu',state); }catch(e){}
   if(db){ try{ await db.doc(DOC).set({state,updatedAt:Date.now()}); st('Guardado'); }catch(e){ st('Guardado en este navegador'); } } else st('Guardado en este navegador'); saveT=null; },700); }
 function load(d){ if(!d) return; const b=DEF(); S={...b,...d,page:d.page||PAGE0,cfg:{...b.cfg,...(d.cfg||{}),price:{...b.cfg.price,...((d.cfg||{}).price||{})},plazo:{...b.cfg.plazo,...((d.cfg||{}).plazo||{})},phase:((d.cfg||{}).phase||b.cfg.phase)},mods:d.v?{...b.mods,...(d.mods||{})}:b.mods,v:2,texts:d.texts||{},reqs:d.reqs||[],notes:d.notes||{},colors:(d.colors&&d.colors.length===5)?d.colors:b.colors};
-  S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; S.na=d.na||{}; S.ansR=d.ansR||{}; S.calc={pct:100,...(d.calc||{}),show:{horas:true,sin:true,resp:true,...((d.calc||{}).show||{})}}; if((d.qv||0)<4){ S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
+  S.hidden=Array.isArray(d.hidden)?d.hidden:b.hidden; S.qs=Array.isArray(d.qs)&&d.qs.length?d.qs:b.qs; S.ans=d.ans||{}; S.avisos=Array.isArray(d.avisos)?d.avisos:b.avisos; S.progs=Array.isArray(d.progs)?d.progs:b.progs; S.prio=Array.isArray(d.prio)?d.prio:[]; S.resp=d.resp||{}; S.mcfg=d.mcfg||{}; S.bubble=d.bubble??true; S.na=d.na||{}; S.ansR=d.ansR||{}; S.calc={pct:100,...(d.calc||{}),show:{horas:true,sin:true,resp:true,...((d.calc||{}).show||{})}}; if((d.qv||0)<4){ S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if((d.qv||0)<3){ const cus=(Array.isArray(d.qs)?d.qs:[]).filter(q=>String(q.id).startsWith('u')); S.qs=Q0.map(q=>({...q})).concat(cus); if(Array.isArray(S.order)){ S.order=S.order.filter(x=>x!=='avisos'); const a=S.order.indexOf('armemos'),p=S.order.indexOf('planes'); if(a>p&&p>=0){ S.order.splice(a,1); S.order.splice(S.order.indexOf('planes'),0,'armemos'); } } S.qs.forEach(q=>{ if(q.v&&!q.rg&&RG0[q.v]) q.rg=RG0[q.v].map(x=>[...x]); }); S.qv=4; } if(d.qv!==2&&(d.qv||0)<2){ Q0.forEach(q=>{ if(!S.qs.some(x=>x.id===q.id)) S.qs.push({...q}); }); S.progs=S.progs.map(x=>x.t==='Instituto Route 66'?{...x,t:'Idiomas en el exterior (Route 66)'}:x); } S.autoAnim=!!d.autoAnim; S.sim=d.sim||{}; S.sysPal=d.sysPal??0; S.sysCus=d.sysCus||null; if(Array.isArray(S.order)&&!S.order.includes('ahorro')){ const i=S.order.indexOf('competencia'); if(i>=0) S.order.splice(i,0,'ahorro'); else { const m_=S.order.indexOf('mercado'); S.order.splice(m_>=0?m_+1:S.order.length,0,'ahorro'); } } if(Array.isArray(S.order)){ S.order=S.order.filter(x=>!DROP.includes(x)); if(!S.order.includes('estetica')){ const j=S.order.indexOf('medida'); S.order.splice(j>=0?j+1:S.order.length,0,'estetica'); } } S.cliColor=d.cliColor??3; S.spot=d.spot??true; S.pdf={...b.pdf,...(d.pdf||{}),sec:{...b.pdf.sec,...((d.pdf||{}).sec||{})}}; }
 
 /* PDF */
 const MDP={cons:'Registro centralizado de todas las consultas recibidas, con su canal de origen y fecha, evitando registros duplicados.',seg:'Control del historial de cada interesado y de los próximos contactos programados, para que ninguna consulta quede sin respuesta.',pos:'Gestión de los postulantes por programa, con sus requisitos, convocatorias y estado de avance.',doc:'Archivo digital de la documentación de cada postulante, con alertas de vencimiento y registro de citas consulares.',pag:'Registro de planes de pago, cuotas, saldos y emisión de recibos.',rep:'Indicadores de gestión actualizados sobre consultas, conversión y desempeño por canal y asesor.',wa:'Automatización de mensajes por la vía oficial de WhatsApp Business: primera respuesta, seguimientos programados y avisos al asesor.',r66:'Gestión de los programas de idiomas en el exterior, con control de cupos, límites de edad y seguimiento hasta el viaje.'};
@@ -1454,9 +1617,9 @@ function buildPdf(){
     if(qa.length) table(['Consulta','Respuesta'],qa.map(q=>[q.t,qShow(q)]),[.6,.4],{first:false});
     if(qn.length){ para('Los siguientes puntos quedaron sin respuesta y se medirán durante la etapa de diagnóstico:',{sz:11.5,after:2}); qn.forEach((q,i)=>para(`${i+1}. ${q.t}`,{sz:11,ind:4,after:1,just:false})); y+=2; } } }
   if(on('mods')){ const ms=MODS.filter(m=>S.mods[m.k]); if(ms.length){ sec('Alcance: módulos y funciones');
-    ms.forEach(m=>{ subN++; brk(30); F('bold',12,INK); doc.text(`${secN}.${subN}  ${modN(m)}`,L,y); F('normal',10,GRAY); doc.text(`${tierN(tierOf(m))}. Dificultad ${DIFN[difOf(m)].toLowerCase()}. Plazo estimado: ${wkOf(m)}.`,L+W,y,{align:'right'}); y+=6.5;
-      para(MDP[m.k]||T('m.'+m.k+'.d',m.d),{sz:11,col:GRAY,after:2});
-      m.f.forEach((f,j)=>{ const nm=T('m.'+m.k+'.f'+j,f), d=T('m.'+m.k+'.fd'+j,(m.fd||[])[j]||''); brk(12); F('normal',11,INK); doc.text(String.fromCharCode(97+j)+')',L+4,y); F('bold',11,INK); doc.text(nm,L+11,y); y+=mm(11)*1.5; if(d) para(d,{sz:11,ind:11,after:1.5}); }); y+=3; }); } }
+    ms.forEach(m=>{ subN++; brk(30); F('bold',12,INK); doc.text(`${secN}.${subN}  ${modN(m)}`,L,y); F('normal',10,GRAY); doc.text(`${tierN(tierOf(m))}. Plazo estimado: ${wkOf(m)}.`,L+W,y,{align:'right'}); y+=6.5;
+      para((S.texts['m.'+m.k+'.d']||'').trim()||MDP[m.k]||m.d,{sz:11,col:GRAY,after:2});
+      fnOf(m).forEach(([nm,d],j)=>{ brk(12); F('normal',11,INK); doc.text(String.fromCharCode(97+j)+')',L+4,y); F('bold',11,INK); doc.text(nm,L+11,y); y+=mm(11)*1.5; if(d) para(d,{sz:11,ind:11,after:1.5}); }); y+=3; }); } }
   if(on('medida')){ const av=S.avisos.filter(a=>a.on), pg=S.progs.filter(a=>a.on), pr=S.prio.map(k=>MODS.find(m=>m.k===k)).filter(Boolean);
     if(av.length||pg.length||pr.length){ sec('Configuración solicitada'); const rows=[]; if(pg.length) rows.push(['Programas',pg.map(a=>a.t).join(', ')]); if(av.length) rows.push(['Avisos',av.map(a=>a.t).join(', ')]); if(pr.length) rows.push(['Prioridad de implementación',pr.map((m,i)=>`${i+1}. ${modN(m)}`).join('; ')]); table(['Tema','Detalle'],rows,[.32,.68]); } }
   if(on('reqs')&&S.reqs.length){ sec('Requerimientos adicionales'); S.reqs.forEach((r,i)=>para(`${i+1}. ${r}`,{sz:11.5,after:1.5,just:false})); }
