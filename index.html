@@ -852,6 +852,20 @@ body.cfgon .tools{right:calc(min(400px,100vw) + 14px)}
 #modAdd{margin:4px 0 12px}
 .mg.many{grid-template-columns:repeat(5,1fr);gap:10px}.mg.many .mt{min-height:150px;padding:14px}.mg.many .mt b{font-size:16px}
 .mg.many2{grid-template-columns:repeat(5,1fr);gap:8px}.mg.many2 .mt{min-height:112px;padding:10px 12px;gap:6px}.mg.many2 .mt b{font-size:14.5px}.mg.many2 .mt .bub{width:38px;height:38px;font-size:18px;border-radius:12px}.mg.many2 .mt>span:not(.bub){display:none}
+
+/* Armemos sin tarjeta de plan: módulos a lo ancho y más grandes */
+.bld{grid-template-columns:1fr!important}
+.mg .mt{min-height:200px;padding:22px}
+.mg .mt .bub{width:60px;height:60px;font-size:28px;border-radius:19px}
+.mg .mt b{font-size:21px}
+.mg .mt>span:not(.bub){font-size:14.5px}
+.mg .mt .inf{font-size:14px;padding:5px 13px}
+.mg.c6{grid-template-columns:repeat(6,1fr);gap:14px}
+.mg.c6 .mt{min-height:190px;padding:18px}
+.mg.c6 .mt b{font-size:18.5px}
+.mg.c6.tight .mt{min-height:132px;padding:14px;gap:6px}
+.mg.c6.tight .mt .bub{width:44px;height:44px;font-size:21px;border-radius:14px}
+.mg.c6.tight .mt b{font-size:16px}
 </style>
 
 <div id="view"><div id="stage"><div class="bg" id="bg"></div><div id="slides"></div></div></div>
@@ -1290,10 +1304,9 @@ SL.push({id:'recibe',title:'Lo que recibe',blobs:[[1260,-340,.75,.6],[-380,600,.
   <div class="g6">${G6.map((g,i)=>`<div data-a="pop" style="--dl:${.35+i*.1}s"><span class="ci ${['g1','g2','g4','g3','g2','g1'][i]}">${ic(g[0])}</span><div>${t(g[1]+'t',g[2],'b')}${t(g[1]+'d',g[3])}</div></div>`).join('')}</div>`});
 
 // 13 Armemos tu plan
-SL.push({id:'armemos',title:'Armemos tu plan',blobs:[[1300,-360,.65,.5],[-400,640,.6,.5],[1420,700,.3,.4]],html:()=>`${h('s13.h','Armemos tu plan')}${t('s13.p','Elijan los módulos y el plan sale solo. Toquen «Ver» para conocer cada función.','p','lead')}
-  <div class="bld"><div><div class="mg ${MODS.length>8?(MODS.length>10?'many2':'many'):''}" id="mg">${MODS.map((m,i)=>`<button class="mt" data-m="${m.k}" data-a="pop" style="--dl:${.35+i*.06}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n,'b')}<span>${fnOf(m).length} ${esc(T('s13.fn','funciones'))}</span><em class="inf" data-inf="${m.k}">${esc(T('s13.ver','Ver'))}</em><i class="tg"></i></button>`).join('')}</div>
-   <div class="req" data-a="rise" style="--dl:.9s"><input id="reqIn" placeholder="${esc(T('s13.ph','Pedido especial de Educultura'))}"><button class="g3" id="reqAdd">${ic('plus')}${esc(T('s13.add','Sumar'))}</button></div><div class="reqs" id="reqs"></div></div>
-   <div class="sumc g3" data-a="rise" style="--dl:.5s" id="sumc"></div></div>
+SL.push({id:'armemos',title:'Armemos tu plan',blobs:[[1300,-360,.65,.5],[-400,640,.6,.5],[1420,700,.3,.4]],html:()=>`${h('s13.h','Armemos tu plan')}${t('s13.p2','Elijan los módulos; el plan aparece en la siguiente diapositiva. Toquen «Ver» para conocer cada función.','p','lead')}
+  <div class="bld"><div><div class="mg ${MODS.length>12?'c6 tight':MODS.length>8?'c6':''}" id="mg">${MODS.map((m,i)=>`<button class="mt" data-m="${m.k}" data-a="pop" style="--dl:${.35+i*.06}s"><span class="bub">${ic(m.ic)}</span>${t('m.'+m.k+'.n',m.n,'b')}<span>${fnOf(m).length} ${esc(T('s13.fn','funciones'))}</span><em class="inf" data-inf="${m.k}">${esc(T('s13.ver','Ver'))}</em><i class="tg"></i></button>`).join('')}</div>
+   <div class="req" data-a="rise" style="--dl:.9s"><input id="reqIn" placeholder="${esc(T('s13.ph','Pedido especial de Educultura'))}"><button class="g3" id="reqAdd">${ic('plus')}${esc(T('s13.add','Sumar'))}</button></div><div class="reqs" id="reqs"></div></div></div>
   <div class="mdl" id="mdl" hidden><div class="mdc" id="mdc"></div></div>`,
   init(el){ el.querySelector('#mg').addEventListener('click',e=>{const b=e.target.closest('.mt'); if(!b||document.body.classList.contains('edit')) return; const inf=e.target.closest('[data-inf]'); if(inf){ openMod(el,inf.dataset.inf); return; } S.mods[b.dataset.m]=!S.mods[b.dataset.m]; syncPlan(); save();});
     el.querySelector('#mdl').addEventListener('click',e=>{ if(e.target.id==='mdl'||e.target.closest('[data-mx]')){ el.querySelector('#mdl').hidden=true; return; } const tg=e.target.closest('[data-mtog]'); if(tg){ const k=tg.dataset.mtog; S.mods[k]=!S.mods[k]; syncPlan(); save(); openMod(el,k); } });
